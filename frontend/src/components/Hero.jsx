@@ -1,49 +1,96 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from './ui/button';
 
 const Hero = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      
+      // Normalize to -50 to 50 for subtle movement
+      const x = ((clientX / innerWidth) - 0.5) * 100;
+      const y = ((clientY / innerHeight) - 0.5) * 100;
+      
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const floatingWords = [
-    { text: 'Web Design', delay: 0 },
-    { text: 'Analytics', delay: 0.2 },
-    { text: 'UX Strategy', delay: 0.4 },
-    { text: 'Data Viz', delay: 0.6 },
-    { text: 'Growth', delay: 0.8 },
-    { text: 'Systems', delay: 1 },
+    { text: 'Web Design', delay: 0, depth: 0.15 },
+    { text: 'Analytics', delay: 0.2, depth: 0.25 },
+    { text: 'UX Strategy', delay: 0.4, depth: 0.35 },
+    { text: 'Data Viz', delay: 0.6, depth: 0.15 },
+    { text: 'Growth', delay: 0.8, depth: 0.25 },
+    { text: 'Systems', delay: 1, depth: 0.35 },
+  ];
+
+  const particles = [
+    ...Array(12).fill(0).map((_, i) => ({
+      id: i,
+      depth: ((i % 3) + 1) * 0.12,
+      size: Math.random() * 6 + 2,
+      color: i % 2 === 0 
+        ? 'radial-gradient(circle, rgba(168,85,247,0.4) 0%, transparent 70%)'
+        : 'radial-gradient(circle, rgba(6,182,212,0.4) 0%, transparent 70%)',
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      duration: 3 + Math.random() * 2,
+      delay: Math.random() * 2,
+    }))
   ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
+      {/* Animated grid background with parallax */}
+      <motion.div
+        className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]"
+        animate={{
+          x: mousePosition.x * 0.15,
+          y: mousePosition.y * 0.15,
+        }}
+        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+      />
       
-      {/* Gradient orbs */}
+      {/* Gradient orbs with parallax */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"
         animate={{
+          x: -mousePosition.x * 0.4,
+          y: -mousePosition.y * 0.4,
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
+          x: { type: 'spring', stiffness: 50, damping: 20 },
+          y: { type: 'spring', stiffness: 50, damping: 20 },
+          scale: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
+          opacity: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
         }}
       />
       <motion.div
         className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"
         animate={{
+          x: mousePosition.x * 0.4,
+          y: mousePosition.y * 0.4,
           scale: [1.2, 1, 1.2],
           opacity: [0.5, 0.3, 0.5],
         }}
         transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
+          x: { type: 'spring', stiffness: 50, damping: 20 },
+          y: { type: 'spring', stiffness: 50, damping: 20 },
+          scale: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
+          opacity: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
         }}
       />
 
-      {/* Floating keywords */}
+      {/* Floating keywords with parallax */}
       {floatingWords.map((word, index) => (
         <motion.div
           key={word.text}
@@ -52,29 +99,70 @@ const Hero = () => {
           animate={{
             opacity: [0.3, 0.6, 0.3],
             y: [0, -20, 0],
-            x: [0, Math.random() * 40 - 20, 0],
-          }}
-          transition={{
-            duration: 5,
-            delay: word.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
+            x: [0 + mousePosition.x * word.depth, Math.random() * 40 - 20 + mousePosition.x * word.depth, 0 + mousePosition.x * word.depth],
           }}
           style={{
+            transform: `translate(${-mousePosition.x * word.depth}px, ${-mousePosition.y * word.depth}px)`,
             top: `${20 + index * 12}%`,
             left: `${10 + (index % 2) * 70}%`,
+          }}
+          transition={{
+            opacity: { duration: 5, delay: word.delay, repeat: Infinity, ease: 'easeInOut' },
+            y: { duration: 5, delay: word.delay, repeat: Infinity, ease: 'easeInOut' },
+            x: { duration: 5, delay: word.delay, repeat: Infinity, ease: 'easeInOut' },
           }}
         >
           {word.text}
         </motion.div>
       ))}
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      {/* Floating UI particles with parallax */}
+      {particles.map((particle) => (
+        <motion.div
+          key={`particle-${particle.id}`}
+          className="absolute rounded-full hidden md:block"
+          style={{
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            background: particle.color,
+            top: `${particle.top}%`,
+            left: `${particle.left}%`,
+            transform: `translate(${-mousePosition.x * particle.depth}px, ${-mousePosition.y * particle.depth}px)`,
+          }}
+          animate={{
+            opacity: [0.2, 0.6, 0.2],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: particle.duration,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Main content with subtle parallax */}
+      <motion.div
+        className="relative z-10 max-w-6xl mx-auto px-6 text-center"
+        animate={{
+          x: -mousePosition.x * 0.05,
+          y: -mousePosition.y * 0.05,
+        }}
+        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            x: -mousePosition.x * 0.03,
+          }}
+          transition={{ 
+            opacity: { duration: 0.8 },
+            y: { duration: 0.8 },
+            x: { type: 'spring', stiffness: 50, damping: 20 },
+          }}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 backdrop-blur-sm mb-8"
         >
           <Sparkles className="w-4 h-4 text-purple-400" />
@@ -83,8 +171,16 @@ const Hero = () => {
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            x: -mousePosition.x * 0.08,
+          }}
+          transition={{ 
+            opacity: { duration: 0.8, delay: 0.2 },
+            y: { duration: 0.8, delay: 0.2 },
+            x: { type: 'spring', stiffness: 50, damping: 20 },
+          }}
           className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent"
           style={{ fontFamily: '"Space Grotesk", sans-serif' }}
         >
@@ -93,8 +189,16 @@ const Hero = () => {
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            x: -mousePosition.x * 0.04,
+          }}
+          transition={{ 
+            opacity: { duration: 0.8, delay: 0.4 },
+            y: { duration: 0.8, delay: 0.4 },
+            x: { type: 'spring', stiffness: 50, damping: 20 },
+          }}
           className="text-xl md:text-2xl text-gray-400 mb-4 max-w-3xl mx-auto"
         >
           I build high-performance digital experiences.
@@ -102,8 +206,16 @@ const Hero = () => {
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            x: -mousePosition.x * 0.02,
+          }}
+          transition={{ 
+            opacity: { duration: 0.8, delay: 0.6 },
+            y: { duration: 0.8, delay: 0.6 },
+            x: { type: 'spring', stiffness: 50, damping: 20 },
+          }}
           className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto"
         >
           Crafting beautiful websites, analyzing data patterns, designing user strategies, and building interactive systems that drive growth.
@@ -111,8 +223,16 @@ const Hero = () => {
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            x: -mousePosition.x * 0.06,
+          }}
+          transition={{ 
+            opacity: { duration: 0.8, delay: 0.8 },
+            y: { duration: 0.8, delay: 0.8 },
+            x: { type: 'spring', stiffness: 50, damping: 20 },
+          }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Button
@@ -134,13 +254,19 @@ const Hero = () => {
             Enter My World
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator with parallax */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        animate={{ 
+          y: [0, 10, 0],
+          x: -mousePosition.x * 0.02,
+        }}
+        transition={{ 
+          y: { duration: 2, repeat: Infinity },
+          x: { type: 'spring', stiffness: 50, damping: 20 },
+        }}
       >
         <div className="w-6 h-10 border-2 border-purple-500/30 rounded-full p-2">
           <motion.div
