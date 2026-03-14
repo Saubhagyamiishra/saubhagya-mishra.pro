@@ -6,6 +6,10 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card } from './ui/card';
 import { useToast } from '../hooks/use-toast';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const Contact = () => {
   const { toast } = useToast();
@@ -20,15 +24,30 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call - will be replaced with actual backend
-    setTimeout(() => {
-      toast({
-        title: 'Message Sent!',
-        description: "Thanks for reaching out. I'll get back to you soon.",
+    try {
+      const response = await axios.post(`${API}/contact`, {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
       });
-      setFormData({ name: '', email: '', message: '' });
+
+      if (response.data.success) {
+        toast({
+          title: 'Message Sent!',
+          description: response.data.message,
+        });
+        setFormData({ name: '', email: '', message: '' });
+      }
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      toast({
+        title: 'Error',
+        description: error.response?.data?.detail || 'Failed to send message. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e) => {
