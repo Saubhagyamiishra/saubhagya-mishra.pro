@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef, useState } from 'react';
 
-const MagneticButton = ({ children, className, onClick, variant = 'primary' }) => {
+const MagneticButton = ({ children, className, onClick, variant = 'primary', type, ...rest }) => {
   const buttonRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -37,6 +37,7 @@ const MagneticButton = ({ children, className, onClick, variant = 'primary' }) =
   return (
     <motion.button
       ref={buttonRef}
+      type={type}
       onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -52,6 +53,7 @@ const MagneticButton = ({ children, className, onClick, variant = 'primary' }) =
         mass: 0.1,
       }}
       className={`group relative ${className}`}
+      {...rest}
     >
       {/* Glow effect on hover */}
       <motion.div

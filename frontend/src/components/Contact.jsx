@@ -40,9 +40,23 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Failed to send message:', error);
+      
+      // Handle error message - ensure it's a string
+      let errorMessage = 'Failed to send message. Please try again.';
+      if (error.response?.data?.detail) {
+        if (typeof error.response.data.detail === 'string') {
+          errorMessage = error.response.data.detail;
+        } else if (Array.isArray(error.response.data.detail)) {
+          // FastAPI validation errors are arrays
+          errorMessage = error.response.data.detail.map(err => err.msg).join(', ');
+        } else if (typeof error.response.data.detail === 'object') {
+          errorMessage = JSON.stringify(error.response.data.detail);
+        }
+      }
+      
       toast({
         title: 'Error',
-        description: error.response?.data?.detail || 'Failed to send message. Please try again.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {
