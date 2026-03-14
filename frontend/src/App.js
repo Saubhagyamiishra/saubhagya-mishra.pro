@@ -1,4 +1,5 @@
 import "@/App.css";
+import LoadingScreenWrapper from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -13,19 +14,21 @@ import { Toaster } from "@/components/ui/toaster";
 
 function App() {
   return (
-    <div className="App bg-[#0a0a0f] min-h-screen">
-      <CustomCursor />
-      <Hero />
-      <About />
-      <Capabilities />
-      <FeaturedWork />
-      <Analytics />
-      <Process />
-      <Lab />
-      <Contact />
-      <Footer />
-      <Toaster />
-    </div>
+    <LoadingScreenWrapper>
+      <div className="App bg-[#0a0a0f] min-h-screen">
+        <CustomCursor />
+        <Hero />
+        <About />
+        <Capabilities />
+        <FeaturedWork />
+        <Analytics />
+        <Process />
+        <Lab />
+        <Contact />
+        <Footer />
+        <Toaster />
+      </div>
+    </LoadingScreenWrapper>
   );
 }
 
