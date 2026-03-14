@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Mail, MapPin, Send } from 'lucide-react';
-import { Button } from './ui/button';
+import MagneticButton from './MagneticButton';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Card } from './ui/card';
@@ -166,16 +166,17 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button
+                <MagneticButton
+                  variant="primary"
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-6 text-lg bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-lg transition-all hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-6 text-lg bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={handleSubmit}
                 >
                   <span className="flex items-center justify-center gap-2">
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                     <Send className="w-5 h-5" />
                   </span>
-                </Button>
+                </MagneticButton>
               </form>
             </Card>
           </motion.div>

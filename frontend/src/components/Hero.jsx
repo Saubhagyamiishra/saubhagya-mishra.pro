@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { Button } from './ui/button';
+import MagneticButton from './MagneticButton';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -235,24 +235,24 @@ const Hero = () => {
           }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Button
-            className="group relative px-8 py-6 text-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.6)]"
+          <MagneticButton
+            variant="primary"
+            className="px-8 py-6 text-lg bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-lg overflow-hidden transition-all hover:scale-105"
             onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="flex items-center gap-2">
               Explore My Work
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity" />
-          </Button>
+          </MagneticButton>
 
-          <Button
+          <MagneticButton
             variant="outline"
-            className="px-8 py-6 text-lg border-2 border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 hover:border-cyan-400 rounded-lg transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]"
+            className="px-8 py-6 text-lg border-2 border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 hover:border-cyan-400 rounded-lg transition-all hover:scale-105 bg-transparent"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Enter My World
-          </Button>
+          </MagneticButton>
         </motion.div>
       </motion.div>
 
