@@ -163,46 +163,49 @@ const ExperimentEngine = () => {
         </defs>
 
         {/* Nodes */}
-        {nodes.map((node, i) => (
-          <motion.g key={`node-${i}`}>
-            {/* Pulse ring */}
-            <motion.circle
-              cx={`${node.x}%`}
-              cy={`${node.y}%`}
-              r={node.size * 2}
-              fill="none"
-              stroke="#06b6d4"
-              strokeWidth="1"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={
-                isActivated
-                  ? {
-                      scale: [1, 2, 1],
-                      opacity: [0.5, 0, 0.5],
-                    }
-                  : {}
-              }
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.2,
-              }}
-            />
-            {/* Main node */}
-            <motion.circle
-              cx={`${node.x}%`}
-              cy={`${node.y}%`}
-              r={node.size}
-              fill="url(#nodeGradient)"
-              initial={{ scale: 0 }}
-              animate={isActivated ? { scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              style={{
-                filter: 'drop-shadow(0 0 8px #06b6d4)',
-              }}
-            />
-          </motion.g>
-        ))}
+        {nodes.map((node, i) => {
+          const nodeSize = node.size || 3; // Fallback to default size
+          return (
+            <motion.g key={`node-${i}`}>
+              {/* Pulse ring */}
+              <motion.circle
+                cx={`${node.x}%`}
+                cy={`${node.y}%`}
+                r={nodeSize * 2}
+                fill="none"
+                stroke="#06b6d4"
+                strokeWidth="1"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={
+                  isActivated
+                    ? {
+                        scale: [1, 2, 1],
+                        opacity: [0.5, 0, 0.5],
+                      }
+                    : {}
+                }
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+              {/* Main node */}
+              <motion.circle
+                cx={`${node.x}%`}
+                cy={`${node.y}%`}
+                r={nodeSize}
+                fill="url(#nodeGradient)"
+                initial={{ scale: 0 }}
+                animate={isActivated ? { scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                style={{
+                  filter: 'drop-shadow(0 0 8px #06b6d4)',
+                }}
+              />
+            </motion.g>
+          );
+        })}
 
         {/* Traveling pulses */}
         {activeExperiment &&

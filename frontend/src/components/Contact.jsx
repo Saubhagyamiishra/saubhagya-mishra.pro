@@ -71,46 +71,49 @@ const Contact = () => {
         )}
 
         {/* Nodes */}
-        {nodes.map((node, i) => (
-          <motion.g key={`node-${i}`}>
-            {/* Pulse ring */}
-            <motion.circle
-              cx={`${node.x}%`}
-              cy={`${node.y}%`}
-              r={node.size * 2}
-              fill="none"
-              stroke="#06b6d4"
-              strokeWidth="1"
-              initial={{ scale: 1, opacity: 0.3 }}
-              animate={
-                showSuccessPulses
-                  ? {
-                      scale: [1, 2.5, 1],
-                      opacity: [0.3, 0, 0.3],
-                    }
-                  : {}
-              }
-              transition={{
-                duration: 1.5,
-                repeat: showSuccessPulses ? 2 : 0,
-                delay: i * 0.1,
-              }}
-            />
-            {/* Main node */}
-            <motion.circle
-              cx={`${node.x}%`}
-              cy={`${node.y}%`}
-              r={node.size}
-              fill="url(#successNodeGradient)"
-              initial={{ opacity: 0.4 }}
-              animate={showSuccessPulses ? { opacity: [0.4, 1, 0.4] } : {}}
-              transition={{ duration: 0.6, repeat: showSuccessPulses ? 3 : 0, delay: i * 0.05 }}
-              style={{
-                filter: 'drop-shadow(0 0 6px #06b6d4)',
-              }}
-            />
-          </motion.g>
-        ))}
+        {nodes.map((node, i) => {
+          const nodeSize = node.size || 3; // Fallback to default size
+          return (
+            <motion.g key={`node-${i}`}>
+              {/* Pulse ring */}
+              <motion.circle
+                cx={`${node.x}%`}
+                cy={`${node.y}%`}
+                r={nodeSize * 2}
+                fill="none"
+                stroke="#06b6d4"
+                strokeWidth="1"
+                initial={{ scale: 1, opacity: 0.3 }}
+                animate={
+                  showSuccessPulses
+                    ? {
+                        scale: [1, 2.5, 1],
+                        opacity: [0.3, 0, 0.3],
+                      }
+                    : {}
+                }
+                transition={{
+                  duration: 1.5,
+                  repeat: showSuccessPulses ? 2 : 0,
+                  delay: i * 0.1,
+                }}
+              />
+              {/* Main node */}
+              <motion.circle
+                cx={`${node.x}%`}
+                cy={`${node.y}%`}
+                r={nodeSize}
+                fill="url(#successNodeGradient)"
+                initial={{ opacity: 0.4 }}
+                animate={showSuccessPulses ? { opacity: [0.4, 1, 0.4] } : {}}
+                transition={{ duration: 0.6, repeat: showSuccessPulses ? 3 : 0, delay: i * 0.05 }}
+                style={{
+                  filter: 'drop-shadow(0 0 6px #06b6d4)',
+                }}
+              />
+            </motion.g>
+          );
+        })}
 
         {/* Success data pulses traveling through network */}
         <AnimatePresence>
