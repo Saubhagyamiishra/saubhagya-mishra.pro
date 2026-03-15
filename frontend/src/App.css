@@ -2,8 +2,11 @@ html {
     scroll-behavior: smooth;
 }
 
-* {
-    cursor: none !important;
+/* Hide default cursor only on desktop devices with fine pointer and hover capability */
+@media (pointer: fine) and (hover: hover) {
+    * {
+        cursor: none !important;
+    }
 }
 
 .App-logo {
