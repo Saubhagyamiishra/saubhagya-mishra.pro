@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { TrendingUp, Users, Target, DollarSign } from 'lucide-react';
 import { Card } from './ui/card';
+import PerformanceChart from './PerformanceChart';
 
 const Analytics = () => {
   const metrics = [
@@ -36,15 +37,6 @@ const Analytics = () => {
       change: '+140%',
       color: 'from-emerald-500 to-teal-500',
     },
-  ];
-
-  const dataPoints = [
-    { month: 'Jan', value: 65 },
-    { month: 'Feb', value: 72 },
-    { month: 'Mar', value: 68 },
-    { month: 'Apr', value: 78 },
-    { month: 'May', value: 85 },
-    { month: 'Jun', value: 92 },
   ];
 
   return (
@@ -113,7 +105,7 @@ const Analytics = () => {
           })}
         </div>
 
-        {/* Graph Visualization */}
+        {/* Interactive Graph Visualization */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,37 +113,14 @@ const Analytics = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Card className="p-8 bg-gradient-to-br from-gray-900/70 to-gray-900/40 border border-gray-800/50 backdrop-blur-sm">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">Performance Trends</h3>
-                <p className="text-gray-400 text-sm">Growth trajectory over 6 months</p>
-              </div>
-              <div className="flex items-center gap-2 text-emerald-400 text-sm font-semibold">
-                <TrendingUp className="w-4 h-4" />
-                <span>+41.5% overall</span>
-              </div>
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-white mb-2">Performance Trends</h3>
+              <p className="text-gray-400 text-sm">
+                Interactive analytics dashboard showing growth trajectory over 6 months
+              </p>
             </div>
 
-            {/* Simple bar chart */}
-            <div className="flex items-end justify-between gap-4 h-64">
-              {dataPoints.map((point, index) => (
-                <div key={point.month} className="flex-1 flex flex-col items-center gap-3">
-                  <motion.div
-                    initial={{ height: 0 }}
-                    whileInView={{ height: `${point.value}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: index * 0.1, ease: 'easeOut' }}
-                    className="w-full bg-gradient-to-t from-purple-600 to-cyan-400 rounded-t-lg relative group"
-                  >
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="text-cyan-400 text-sm font-semibold">{point.value}%</span>
-                    </div>
-                    <div className="absolute top-0 inset-x-0 h-4 bg-white/20 blur-sm" />
-                  </motion.div>
-                  <span className="text-gray-500 text-sm font-medium">{point.month}</span>
-                </div>
-              ))}
-            </div>
+            <PerformanceChart />
           </Card>
         </motion.div>
       </div>
