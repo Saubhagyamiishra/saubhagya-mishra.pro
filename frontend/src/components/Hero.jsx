@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import InteractiveName from './InteractiveName';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -169,7 +170,7 @@ const Hero = () => {
           <span className="text-sm text-purple-300">Digital Experience Builder</span>
         </motion.div>
 
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ 
             opacity: 1, 
@@ -181,96 +182,10 @@ const Hero = () => {
             y: { duration: 0.8, delay: 0.2 },
             x: { type: 'spring', stiffness: 50, damping: 20 },
           }}
-          className="relative text-6xl md:text-8xl font-bold mb-6"
-          style={{ fontFamily: '"Space Grotesk", sans-serif' }}
+          className="mb-6"
         >
-          <span className="relative inline-block">
-            {/* Base white text */}
-            <span className="relative z-10 text-white">
-              Saubhagya Mishra
-            </span>
-            
-            {/* Kinetic sweep effect - Main cyan gradient */}
-            <motion.span
-              className="absolute inset-0 z-20 pointer-events-none"
-              style={{
-                background: 'linear-gradient(90deg, transparent 0%, transparent 35%, rgba(6,182,212,1) 50%, transparent 65%, transparent 100%)',
-                backgroundSize: '200% 100%',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'drop-shadow(0 0 25px rgba(6,182,212,0.8)) drop-shadow(0 0 15px rgba(6,182,212,0.6))',
-              }}
-              animate={{
-                backgroundPosition: ['250% 0%', '-250% 0%'],
-              }}
-              transition={{
-                duration: 2,
-                ease: [0.33, 1, 0.68, 1], // Cinematic easing
-                repeat: Infinity,
-                repeatDelay: 3,
-              }}
-            >
-              Saubhagya Mishra
-            </motion.span>
-
-            {/* Motion blur layer - creates light beam effect */}
-            <motion.span
-              className="absolute inset-0 z-15 pointer-events-none"
-              style={{
-                background: 'linear-gradient(90deg, transparent 0%, transparent 40%, rgba(34,211,238,0.4) 50%, transparent 60%, transparent 100%)',
-                backgroundSize: '150% 100%',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'blur(8px) drop-shadow(0 0 40px rgba(6,182,212,0.6))',
-              }}
-              animate={{
-                backgroundPosition: ['250% 0%', '-250% 0%'],
-              }}
-              transition={{
-                duration: 2,
-                ease: [0.33, 1, 0.68, 1],
-                repeat: Infinity,
-                repeatDelay: 3,
-              }}
-            >
-              Saubhagya Mishra
-            </motion.span>
-
-            {/* Glow trail effect */}
-            <motion.span
-              className="absolute inset-0 z-12 pointer-events-none opacity-70"
-              style={{
-                background: 'linear-gradient(90deg, transparent 0%, transparent 42%, rgba(103,232,249,0.3) 50%, transparent 58%, transparent 100%)',
-                backgroundSize: '120% 100%',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                filter: 'blur(12px)',
-              }}
-              animate={{
-                backgroundPosition: ['250% 0%', '-250% 0%'],
-              }}
-              transition={{
-                duration: 2,
-                ease: [0.33, 1, 0.68, 1],
-                repeat: Infinity,
-                repeatDelay: 3,
-              }}
-            >
-              Saubhagya Mishra
-            </motion.span>
-
-            {/* Subtle base gradient for depth */}
-            <span 
-              className="absolute inset-0 z-5 bg-gradient-to-r from-white via-gray-100 to-cyan-50 bg-clip-text text-transparent opacity-50"
-              style={{ WebkitBackgroundClip: 'text', backgroundClip: 'text' }}
-            >
-              Saubhagya Mishra
-            </span>
-          </span>
-        </motion.h1>
+          <InteractiveName />
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
