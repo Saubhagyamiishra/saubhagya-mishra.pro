@@ -149,3 +149,30 @@ async def get_file(filename: str):
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="File not found")
     return FileResponse(file_path)
+
+@router.patch("/submissions/{submission_id}/status")
+async def update_submission_status(submission_id: str, status: str):
+    """
+    Update submission status (admin endpoint)
+    """
+    from bson import ObjectId
+    
+    if status not in ["new", "reviewed", "replied"]:
+        raise HTTPException(status_code=400, detail="Invalid status")
+    
+    try:
+        result = await contact_collection.update_one(
+            {"_id": ObjectId(submission_id)},
+            {"$set": {"status": status}}
+        )
+        
+        if result.modified_count == 0:
+            raise HTTPException(status_code=404, detail="Submission not found")
+        
+        return {"success": True, "message": "Status updated"}
+    except Exception as e:
+        logger.error(f"Error updating status: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to update status"
+        )

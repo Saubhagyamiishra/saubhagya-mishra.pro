@@ -1,4 +1,5 @@
 import "@/App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingScreenWrapper from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
 import Hero from "@/components/Hero";
@@ -10,25 +11,39 @@ import Process from "@/components/Process";
 import ExperimentEngine from "@/components/ExperimentEngine";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import AdminDashboard from "@/components/AdminDashboard";
 import { Toaster } from "@/components/ui/toaster";
 
 function App() {
   return (
-    <LoadingScreenWrapper>
-      <div className="App bg-[#0a0a0f] min-h-screen">
-        <CustomCursor />
-        <Hero />
-        <About />
-        <Capabilities />
-        <FeaturedWork />
-        <Analytics />
-        <Process />
-        <ExperimentEngine />
-        <Contact />
-        <Footer />
-        <Toaster />
-      </div>
-    </LoadingScreenWrapper>
+    <BrowserRouter>
+      <Routes>
+        {/* Admin Route */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        
+        {/* Main Portfolio */}
+        <Route
+          path="/"
+          element={
+            <LoadingScreenWrapper>
+              <div className="App bg-[#0a0a0f] min-h-screen">
+                <CustomCursor />
+                <Hero />
+                <About />
+                <Capabilities />
+                <FeaturedWork />
+                <Analytics />
+                <Process />
+                <ExperimentEngine />
+                <Contact />
+                <Footer />
+                <Toaster />
+              </div>
+            </LoadingScreenWrapper>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
