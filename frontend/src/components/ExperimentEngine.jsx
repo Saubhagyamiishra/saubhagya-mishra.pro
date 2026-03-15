@@ -101,19 +101,48 @@ const ExperimentEngine = () => {
                 Math.pow(node.x - otherNode.x, 2) + Math.pow(node.y - otherNode.y, 2)
               );
               if (distance < 25) {
+                const lineId = `line-${i}-${j}`;
                 return (
-                  <motion.line
-                    key={`line-${i}-${j}`}
-                    x1={`${node.x}%`}
-                    y1={`${node.y}%`}
-                    x2={`${otherNode.x}%`}
-                    y2={`${otherNode.y}%`}
-                    stroke="url(#lineGradient)"
-                    strokeWidth="1"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.3 }}
-                    transition={{ duration: 2, delay: i * 0.1 }}
-                  />
+                  <g key={lineId}>
+                    <motion.line
+                      id={lineId}
+                      x1={`${node.x}%`}
+                      y1={`${node.y}%`}
+                      x2={`${otherNode.x}%`}
+                      y2={`${otherNode.y}%`}
+                      stroke="url(#lineGradient)"
+                      strokeWidth="1"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 0.3 }}
+                      transition={{ duration: 2, delay: i * 0.1 }}
+                    />
+                    
+                    {/* Traveling data pulse */}
+                    <motion.circle
+                      r="2"
+                      fill="#06b6d4"
+                      style={{
+                        filter: 'drop-shadow(0 0 6px #06b6d4)',
+                      }}
+                      initial={{
+                        cx: `${node.x}%`,
+                        cy: `${node.y}%`,
+                        opacity: 0,
+                      }}
+                      animate={{
+                        cx: [`${node.x}%`, `${otherNode.x}%`],
+                        cy: [`${node.y}%`, `${otherNode.y}%`],
+                        opacity: [0, 1, 1, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        repeatDelay: Math.random() * 5 + 3,
+                        ease: 'linear',
+                        delay: Math.random() * 8,
+                      }}
+                    />
+                  </g>
                 );
               }
               return null;
@@ -196,6 +225,38 @@ const ExperimentEngine = () => {
               }}
             />
           ))}
+        
+        {/* Random data bursts - occasional pulses even when inactive */}
+        {isActivated && nodes.slice(0, 8).map((node, i) => {
+          const targetNode = nodes[(i + 3) % nodes.length];
+          return (
+            <motion.circle
+              key={`burst-${i}`}
+              r="2.5"
+              fill="#a855f7"
+              style={{
+                filter: 'drop-shadow(0 0 8px #a855f7)',
+              }}
+              initial={{
+                cx: `${node.x}%`,
+                cy: `${node.y}%`,
+                opacity: 0,
+              }}
+              animate={{
+                cx: [`${node.x}%`, `${targetNode.x}%`],
+                cy: [`${node.y}%`, `${targetNode.y}%`],
+                opacity: [0, 0.8, 0.8, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                repeatDelay: Math.random() * 6 + 4,
+                ease: 'easeInOut',
+                delay: Math.random() * 10 + i * 0.5,
+              }}
+            />
+          );
+        })}
       </svg>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
