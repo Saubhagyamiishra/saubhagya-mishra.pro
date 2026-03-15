@@ -271,9 +271,10 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Reactor Orb */}
+      {/* Scroll Reactor Orb - Positioned at section intersection */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute left-1/2 -translate-x-1/2"
+        style={{ top: 'calc(100vh - 60px)' }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ 
           opacity: 1, 
