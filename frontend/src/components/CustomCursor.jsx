@@ -4,8 +4,26 @@ import { motion } from 'framer-motion';
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    // Check if device has fine pointer (mouse) and hover capability
+    const checkDevice = () => {
+      const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const hasHoverCapability = window.matchMedia('(hover: hover)').matches;
+      const isDesktopDevice = hasFinePointer && hasHoverCapability;
+      setIsDesktop(isDesktopDevice);
+      return isDesktopDevice;
+    };
+
+    // Initial check
+    const shouldShowCursor = checkDevice();
+
+    // Only set up event listeners if on desktop
+    if (!shouldShowCursor) {
+      return;
+    }
+
     const updateMousePosition = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -21,11 +39,29 @@ const CustomCursor = () => {
     window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('mouseover', handleMouseOver);
 
+    // Listen for device changes (rare, but good for responsive testing)
+    const pointerQuery = window.matchMedia('(pointer: fine)');
+    const hoverQuery = window.matchMedia('(hover: hover)');
+    
+    const handleMediaChange = () => {
+      checkDevice();
+    };
+
+    pointerQuery.addEventListener('change', handleMediaChange);
+    hoverQuery.addEventListener('change', handleMediaChange);
+
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
+      pointerQuery.removeEventListener('change', handleMediaChange);
+      hoverQuery.removeEventListener('change', handleMediaChange);
     };
   }, []);
+
+  // Don't render anything on mobile/tablet
+  if (!isDesktop) {
+    return null;
+  }
 
   return (
     <>
