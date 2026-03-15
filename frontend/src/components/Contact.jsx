@@ -1,73 +1,9 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Mail, MapPin, Send } from 'lucide-react';
-import MagneticButton from './MagneticButton';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
+import { Mail, MapPin } from 'lucide-react';
 import { Card } from './ui/card';
-import { useToast } from '../hooks/use-toast';
-import axios from 'axios';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+import AIContactForm from './AIContactForm';
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const response = await axios.post(`${API}/contact`, {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-      });
-
-      if (response.data.success) {
-        toast({
-          title: 'Message Sent!',
-          description: response.data.message,
-        });
-        setFormData({ name: '', email: '', message: '' });
-      }
-    } catch (error) {
-      console.error('Failed to send message:', error);
-      
-      // Handle error message - ensure it's a string
-      let errorMessage = 'Failed to send message. Please try again.';
-      if (error.response?.data?.detail) {
-        if (typeof error.response.data.detail === 'string') {
-          errorMessage = error.response.data.detail;
-        } else if (Array.isArray(error.response.data.detail)) {
-          // FastAPI validation errors are arrays
-          errorMessage = error.response.data.detail.map(err => err.msg).join(', ');
-        } else if (typeof error.response.data.detail === 'object') {
-          errorMessage = JSON.stringify(error.response.data.detail);
-        }
-      }
-      
-      toast({
-        title: 'Error',
-        description: errorMessage,
-        variant: 'destructive',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
     <section id="contact" className="relative py-32 bg-gradient-to-b from-[#0f0f14] to-[#0a0a0f] overflow-hidden">
       {/* Background elements */}
@@ -82,12 +18,12 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-4 block">Get In Touch</span>
+          <span className="text-cyan-400 text-sm font-semibold uppercase tracking-wider mb-4 block">AI-Powered Project Collaboration</span>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
-            Let's build something that stands out.
+            Let's Build Something Extraordinary
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind? Let's collaborate and create something extraordinary together.
+            Share your vision and let our AI assistant help structure your project for premium collaboration.
           </p>
         </motion.div>
 
@@ -141,7 +77,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* AI Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -150,67 +86,7 @@ const Contact = () => {
             className="lg:col-span-2"
           >
             <Card className="p-8 bg-gradient-to-br from-gray-900/70 to-gray-900/40 border border-gray-800/50 backdrop-blur-sm">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Your Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500/20"
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email Address
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500/20"
-                    placeholder="john@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Your Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={6}
-                    className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500/20 resize-none"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-
-                <MagneticButton
-                  variant="primary"
-                  type="submit"
-                  className="w-full py-6 text-lg bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={handleSubmit}
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                    <Send className="w-5 h-5" />
-                  </span>
-                </MagneticButton>
-              </form>
+              <AIContactForm />
             </Card>
           </motion.div>
         </div>
