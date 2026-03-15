@@ -7,7 +7,7 @@ import Capabilities from "@/components/Capabilities";
 import FeaturedWork from "@/components/FeaturedWork";
 import Analytics from "@/components/Analytics";
 import Process from "@/components/Process";
-import Lab from "@/components/Lab";
+import ExperimentEngine from "@/components/ExperimentEngine";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
@@ -23,7 +23,7 @@ function App() {
         <FeaturedWork />
         <Analytics />
         <Process />
-        <Lab />
+        <ExperimentEngine />
         <Contact />
         <Footer />
         <Toaster />
