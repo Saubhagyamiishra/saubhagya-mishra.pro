@@ -181,10 +181,47 @@ const Hero = () => {
             y: { duration: 0.8, delay: 0.2 },
             x: { type: 'spring', stiffness: 50, damping: 20 },
           }}
-          className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent"
+          className="relative text-6xl md:text-8xl font-bold mb-6 overflow-hidden"
           style={{ fontFamily: '"Space Grotesk", sans-serif' }}
         >
-          Saubhagya Mishra
+          {/* Base text */}
+          <span className="relative inline-block">
+            <span className="relative z-10 text-white">
+              Saubhagya Mishra
+            </span>
+            
+            {/* Kinetic sweep effect */}
+            <motion.span
+              className="absolute inset-0 z-20"
+              style={{
+                background: 'linear-gradient(90deg, transparent 0%, transparent 30%, rgba(6,182,212,0.9) 50%, transparent 70%, transparent 100%)',
+                backgroundSize: '200% 100%',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                filter: 'drop-shadow(0 0 20px rgba(6,182,212,0.6))',
+              }}
+              animate={{
+                backgroundPosition: ['200% 0%', '-200% 0%'],
+              }}
+              transition={{
+                duration: 1.5,
+                ease: 'linear',
+                repeat: Infinity,
+                repeatDelay: 3,
+              }}
+            >
+              Saubhagya Mishra
+            </motion.span>
+
+            {/* Subtle gradient overlay for depth */}
+            <span 
+              className="absolute inset-0 bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent opacity-70"
+              style={{ WebkitBackgroundClip: 'text', backgroundClip: 'text' }}
+            >
+              Saubhagya Mishra
+            </span>
+          </span>
         </motion.h1>
 
         <motion.p
