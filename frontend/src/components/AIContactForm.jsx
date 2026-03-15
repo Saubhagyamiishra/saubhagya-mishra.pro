@@ -10,7 +10,7 @@ import axios from 'axios';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-const AIContactForm = () => {
+const AIContactForm = ({ onSuccess }) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -167,6 +167,7 @@ const AIContactForm = () => {
 
       if (response.data.success) {
         setShowSuccess(true);
+        if (onSuccess) onSuccess(); // Trigger network animation
         setTimeout(() => {
           setFormData({ name: '', email: '', message: '' });
           setAiSuggestions({ projectType: null, complexity: null, technologies: [], timeline: null });
