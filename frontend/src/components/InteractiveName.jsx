@@ -191,8 +191,10 @@ const InteractiveName = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [containerRect, setContainerRect] = useState(null);
   
-  const name = "Saubhagya Mishra";
-  const letters = name.split('');
+  const firstName = "Saubhagya";
+  const lastName = "Mishra";
+  const firstNameLetters = firstName.split('');
+  const lastNameLetters = lastName.split('');
 
   useEffect(() => {
     if (containerRef.current) {
@@ -223,16 +225,33 @@ const InteractiveName = () => {
       className="relative inline-block cursor-pointer select-none"
       style={{ fontFamily: '"Space Grotesk", sans-serif' }}
     >
-      {letters.map((letter, index) => (
-        <Letter
-          key={`${letter}-${index}`}
-          letter={letter}
-          index={index}
-          mousePosition={mousePosition}
-          isHovering={isHovering}
-          containerRect={containerRect}
-        />
-      ))}
+      {/* First name */}
+      <div className="block">
+        {firstNameLetters.map((letter, index) => (
+          <Letter
+            key={`first-${letter}-${index}`}
+            letter={letter}
+            index={index}
+            mousePosition={mousePosition}
+            isHovering={isHovering}
+            containerRect={containerRect}
+          />
+        ))}
+      </div>
+      
+      {/* Last name */}
+      <div className="block">
+        {lastNameLetters.map((letter, index) => (
+          <Letter
+            key={`last-${letter}-${index}`}
+            letter={letter}
+            index={index + firstNameLetters.length}
+            mousePosition={mousePosition}
+            isHovering={isHovering}
+            containerRect={containerRect}
+          />
+        ))}
+      </div>
       
       {/* Hover hint */}
       {!isHovering && (
