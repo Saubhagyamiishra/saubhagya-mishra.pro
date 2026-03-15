@@ -100,6 +100,16 @@ const AIContactForm = ({ onSuccess }) => {
       formData.append('file', file);
 
       try {
+        // Generate preview for images
+        let preview = null;
+        if (file.type.startsWith('image/')) {
+          preview = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(file);
+          });
+        }
+
         const response = await axios.post(`${API}/contact/upload`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
@@ -112,6 +122,7 @@ const AIContactForm = ({ onSuccess }) => {
               path: response.data.file_path,
               type: file.type,
               size: file.size,
+              preview: preview,
             },
           ]);
         }
@@ -124,6 +135,17 @@ const AIContactForm = ({ onSuccess }) => {
         });
       }
     }
+  };
+
+  const getFileIcon = (type) => {
+    if (type.startsWith('image/')) return { icon: '🖼️', color: 'from-purple-500 to-pink-500', text: 'IMAGE' };
+    if (type.startsWith('video/')) return { icon: '🎬', color: 'from-cyan-500 to-blue-500', text: 'VIDEO' };
+    if (type.includes('pdf')) return { icon: '📄', color: 'from-red-500 to-orange-500', text: 'PDF' };
+    if (type.includes('word') || type.includes('document')) return { icon: '📝', color: 'from-blue-500 to-indigo-500', text: 'DOC' };
+    if (type.includes('sheet') || type.includes('excel')) return { icon: '📊', color: 'from-emerald-500 to-teal-500', text: 'EXCEL' };
+    if (type.includes('presentation') || type.includes('powerpoint')) return { icon: '📊', color: 'from-amber-500 to-yellow-500', text: 'PPT' };
+    if (type.startsWith('audio/')) return { icon: '🎵', color: 'from-violet-500 to-purple-500', text: 'AUDIO' };
+    return { icon: '📎', color: 'from-gray-500 to-gray-600', text: 'FILE' };
   };
 
   const handleDragOver = (e) => {
@@ -370,34 +392,116 @@ const AIContactForm = ({ onSuccess }) => {
             <p className="text-xs text-gray-600">Images, videos, PDFs, documents (max 10MB each)</p>
           </div>
 
-          {/* Uploaded Files */}
+          {/* Uploaded Files - Enhanced Floating Cards */}
           {uploadedFiles.length > 0 && (
-            <div className="mt-4 space-y-2">
-              {uploadedFiles.map((file, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="flex items-center justify-between p-3 bg-gray-800/50 border border-gray-700 rounded-lg"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-cyan-500/20 rounded">
-                      <Upload className="w-4 h-4 text-cyan-400" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-white font-medium">{file.name}</p>
-                      <p className="text-xs text-gray-500">{(file.size / 1024).toFixed(1)} KB</p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => removeFile(index)}
-                    className="p-1 hover:bg-red-500/20 rounded transition-colors"
-                  >
-                    <X className="w-4 h-4 text-red-400" />
-                  </button>
-                </motion.div>
-              ))}
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <AnimatePresence mode="popLayout">
+                {uploadedFiles.map((file, index) => {
+                  const fileInfo = getFileIcon(file.type);
+                  return (
+                    <motion.div
+                      key={index}
+                      layout
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      animate={{ 
+                        opacity: 1, 
+                        scale: 1, 
+                        y: 0,
+                        transition: {
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                          delay: index * 0.1
+                        }
+                      }}
+                      exit={{ 
+                        opacity: 0, 
+                        scale: 0.8, 
+                        y: -20,
+                        transition: { duration: 0.2 }
+                      }}
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -4,
+                        transition: { duration: 0.2 }
+                      }}
+                      className="group relative overflow-hidden rounded-xl border border-gray-700/50 bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm hover:border-purple-500/50 transition-all"
+                    >
+                      {/* Gradient Background Effect */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${fileInfo.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
+                      
+                      {/* Content */}
+                      <div className="relative p-4">
+                        <div className="flex items-start gap-3">
+                          {/* Preview or Icon */}
+                          <div className="relative flex-shrink-0">
+                            {file.preview ? (
+                              <div className="w-16 h-16 rounded-lg overflow-hidden border border-gray-700">
+                                <img 
+                                  src={file.preview} 
+                                  alt={file.name}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            ) : (
+                              <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${fileInfo.color} flex items-center justify-center text-3xl`}>
+                                {fileInfo.icon}
+                              </div>
+                            )}
+                            
+                            {/* File Type Badge */}
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ delay: index * 0.1 + 0.2 }}
+                              className={`absolute -top-2 -right-2 px-2 py-1 rounded-md bg-gradient-to-r ${fileInfo.color} text-[10px] font-bold text-white shadow-lg`}
+                            >
+                              {fileInfo.text}
+                            </motion.div>
+                          </div>
+
+                          {/* File Info */}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-white font-medium truncate mb-1 group-hover:text-purple-300 transition-colors">
+                              {file.name}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {(file.size / 1024).toFixed(1)} KB
+                            </p>
+                            
+                            {/* Upload Success Indicator */}
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: "100%" }}
+                              transition={{ duration: 0.5, delay: index * 0.1 }}
+                              className="mt-2 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"
+                            />
+                          </div>
+
+                          {/* Remove Button */}
+                          <motion.button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            whileHover={{ scale: 1.1, rotate: 90 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="flex-shrink-0 p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 transition-colors"
+                          >
+                            <X className="w-4 h-4 text-red-400" />
+                          </motion.button>
+                        </div>
+                      </div>
+
+                      {/* Shimmer Effect on Hover */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
+                        transition={{ duration: 0.6 }}
+                      />
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
             </div>
           )}
         </div>

@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
           
           <p className="text-gray-400 text-sm mb-2">
-            Crafted with passion in Boston
+            Built with curiosity, code, and a slight obsession with making things better.
           </p>
           
           <p className="text-gray-600 text-xs">
