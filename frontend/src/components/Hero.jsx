@@ -1,11 +1,13 @@
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 import InteractiveName from './InteractiveName';
+import ScrollReactor from './ScrollReactor';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const gridControls = useAnimation();
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -47,6 +49,16 @@ const Hero = () => {
     }))
   ];
 
+  // Handle scroll reactor activation
+  const handleReactorActivate = async () => {
+    // Trigger grid pulse animation
+    await gridControls.start({
+      opacity: [0.03, 0.15, 0.03],
+      scale: [1, 1.05, 1],
+      transition: { duration: 1.2, ease: 'easeInOut' }
+    });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
       {/* Animated grid background with parallax */}
@@ -55,6 +67,9 @@ const Hero = () => {
         animate={{
           x: mousePosition.x * 0.15,
           y: mousePosition.y * 0.15,
+        }}
+        style={{
+          animate: gridControls
         }}
         transition={{ type: 'spring', stiffness: 50, damping: 20 }}
       />
@@ -256,25 +271,20 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator with parallax */}
+      {/* Scroll Reactor Orb */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ 
-          y: [0, 10, 0],
-          x: -mousePosition.x * 0.02,
+          opacity: 1, 
+          y: 0,
         }}
         transition={{ 
-          y: { duration: 2, repeat: Infinity },
-          x: { type: 'spring', stiffness: 50, damping: 20 },
+          opacity: { duration: 0.8, delay: 1.2 },
+          y: { duration: 0.8, delay: 1.2 },
         }}
       >
-        <div className="w-6 h-10 border-2 border-purple-500/30 rounded-full p-2">
-          <motion.div
-            className="w-1 h-2 bg-purple-500 rounded-full mx-auto"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-        </div>
+        <ScrollReactor onActivate={handleReactorActivate} />
       </motion.div>
     </section>
   );
