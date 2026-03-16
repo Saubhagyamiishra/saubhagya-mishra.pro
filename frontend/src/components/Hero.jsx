@@ -14,9 +14,9 @@ const Hero = () => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
       
-      // Normalize to -50 to 50 for subtle movement
-      const x = ((clientX / innerWidth) - 0.5) * 100;
-      const y = ((clientY / innerHeight) - 0.5) * 100;
+      // Normalize to -20 to 20 for very subtle movement (reduced from -50 to 50)
+      const x = ((clientX / innerWidth) - 0.5) * 40;
+      const y = ((clientY / innerHeight) - 0.5) * 40;
       
       setMousePosition({ x, y });
     };
@@ -67,8 +67,8 @@ const Hero = () => {
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]"
           animate={{
-            x: mousePosition.x * 0.15,
-            y: mousePosition.y * 0.15,
+            x: mousePosition.x * 0.05,
+            y: mousePosition.y * 0.05,
           }}
           transition={{ type: 'spring', stiffness: 50, damping: 20 }}
         />
@@ -77,8 +77,8 @@ const Hero = () => {
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"
         animate={{
-          x: -mousePosition.x * 0.4,
-          y: -mousePosition.y * 0.4,
+          x: -mousePosition.x * 0.15,
+          y: -mousePosition.y * 0.15,
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
         }}
@@ -92,8 +92,8 @@ const Hero = () => {
       <motion.div
         className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"
         animate={{
-          x: mousePosition.x * 0.4,
-          y: mousePosition.y * 0.4,
+          x: mousePosition.x * 0.15,
+          y: mousePosition.y * 0.15,
           scale: [1.2, 1, 1.2],
           opacity: [0.5, 0.3, 0.5],
         }}
@@ -114,10 +114,10 @@ const Hero = () => {
           animate={{
             opacity: [0.3, 0.6, 0.3],
             y: [0, -20, 0],
-            x: [0 + mousePosition.x * word.depth, Math.random() * 40 - 20 + mousePosition.x * word.depth, 0 + mousePosition.x * word.depth],
+            x: [0 + mousePosition.x * word.depth * 0.3, Math.random() * 40 - 20 + mousePosition.x * word.depth * 0.3, 0 + mousePosition.x * word.depth * 0.3],
           }}
           style={{
-            transform: `translate(${-mousePosition.x * word.depth}px, ${-mousePosition.y * word.depth}px)`,
+            transform: `translate(${-mousePosition.x * word.depth * 0.3}px, ${-mousePosition.y * word.depth * 0.3}px)`,
             top: `${20 + index * 12}%`,
             left: `${10 + (index % 2) * 70}%`,
           }}
@@ -142,7 +142,7 @@ const Hero = () => {
             background: particle.color,
             top: `${particle.top}%`,
             left: `${particle.left}%`,
-            transform: `translate(${-mousePosition.x * particle.depth}px, ${-mousePosition.y * particle.depth}px)`,
+            transform: `translate(${-mousePosition.x * particle.depth * 0.3}px, ${-mousePosition.y * particle.depth * 0.3}px)`,
           }}
           animate={{
             opacity: [0.2, 0.6, 0.2],
@@ -162,8 +162,8 @@ const Hero = () => {
       <motion.div
         className="relative z-10 max-w-6xl mx-auto px-6 text-center"
         animate={{
-          x: -mousePosition.x * 0.05,
-          y: -mousePosition.y * 0.05,
+          x: -mousePosition.x * 0.02,
+          y: -mousePosition.y * 0.02,
         }}
         transition={{ type: 'spring', stiffness: 50, damping: 20 }}
       >
@@ -172,7 +172,7 @@ const Hero = () => {
           animate={{ 
             opacity: 1, 
             y: 0,
-            x: -mousePosition.x * 0.03,
+            x: -mousePosition.x * 0.01,
           }}
           transition={{ 
             opacity: { duration: 0.8 },
@@ -190,7 +190,7 @@ const Hero = () => {
           animate={{ 
             opacity: 1, 
             y: 0,
-            x: -mousePosition.x * 0.08,
+            x: -mousePosition.x * 0.02,
           }}
           transition={{ 
             opacity: { duration: 0.8, delay: 0.2 },
@@ -207,7 +207,7 @@ const Hero = () => {
           animate={{ 
             opacity: 1, 
             y: 0,
-            x: -mousePosition.x * 0.04,
+            x: -mousePosition.x * 0.015,
           }}
           transition={{ 
             opacity: { duration: 0.8, delay: 0.4 },
@@ -224,7 +224,7 @@ const Hero = () => {
           animate={{ 
             opacity: 1, 
             y: 0,
-            x: -mousePosition.x * 0.02,
+            x: -mousePosition.x * 0.01,
           }}
           transition={{ 
             opacity: { duration: 0.8, delay: 0.6 },
@@ -241,7 +241,7 @@ const Hero = () => {
           animate={{ 
             opacity: 1, 
             y: 0,
-            x: -mousePosition.x * 0.06,
+            x: -mousePosition.x * 0.015,
           }}
           transition={{ 
             opacity: { duration: 0.8, delay: 0.8 },
