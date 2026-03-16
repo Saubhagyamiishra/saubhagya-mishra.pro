@@ -72,7 +72,7 @@ const ScrollReactor = ({ onActivate }) => {
   const proximityScale = Math.max(0, Math.min(1, (150 - mouseDistance) / 150));
 
   return (
-    <div className="relative flex items-center justify-center z-50" style={{ minHeight: '140px', minWidth: '140px' }}>
+    <div className="relative flex items-center justify-center" style={{ minHeight: '180px', minWidth: '180px', zIndex: 100 }}>
       {/* Massive ambient glow layers */}
       <motion.div
         className="absolute w-80 h-80 rounded-full blur-[100px]"
