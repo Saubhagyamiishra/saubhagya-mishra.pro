@@ -43,7 +43,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="relative pt-48 pb-32 bg-[#0a0a0f] overflow-hidden">
+    <section id="about" className="relative pt-64 pb-32 bg-[#0a0a0f] overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(168,85,247,0.05),transparent_50%)]" />
       

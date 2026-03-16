@@ -275,7 +275,7 @@ const Hero = () => {
       <motion.div
         className="absolute left-1/2 -translate-x-1/2"
         style={{ 
-          top: 'calc(100vh - 100px)',
+          top: 'calc(100vh - 200px)',
           zIndex: 100
         }}
         initial={{ opacity: 0, y: 20 }}
