@@ -26,7 +26,7 @@ function App() {
           path="/"
           element={
             <LoadingScreenWrapper>
-              <div className="App bg-[#0a0a0f] min-h-screen">
+              <div className="App bg-[#0a0a0f] min-h-screen overflow-x-hidden w-full max-w-[100vw]">
                 <CustomCursor />
                 <Hero />
                 <About />

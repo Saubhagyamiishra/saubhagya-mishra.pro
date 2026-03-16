@@ -60,19 +60,18 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0f]">
-      {/* Animated grid background with parallax */}
-      <motion.div
-        className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]"
-        animate={{
-          x: mousePosition.x * 0.15,
-          y: mousePosition.y * 0.15,
-        }}
-        style={{
-          animate: gridControls
-        }}
-        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
-      />
+    <section className="relative min-h-screen flex items-center justify-center bg-[#0a0a0f] w-full max-w-[100vw] overflow-hidden">
+      {/* Container for all background effects - clipped */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Animated grid background with parallax */}
+        <motion.div
+          className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.03)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]"
+          animate={{
+            x: mousePosition.x * 0.15,
+            y: mousePosition.y * 0.15,
+          }}
+          transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+        />
       
       {/* Gradient orbs with parallax */}
       <motion.div
@@ -157,6 +156,7 @@ const Hero = () => {
           }}
         />
       ))}
+      </div>
 
       {/* Main content with subtle parallax */}
       <motion.div
@@ -273,8 +273,8 @@ const Hero = () => {
 
       {/* Scroll Reactor Orb - Positioned at section intersection */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2"
-        style={{ top: 'calc(100vh - 60px)' }}
+        className="absolute left-1/2 -translate-x-1/2 z-50"
+        style={{ top: 'calc(100vh - 80px)' }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ 
           opacity: 1, 

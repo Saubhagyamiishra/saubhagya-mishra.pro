@@ -76,10 +76,10 @@ const ScrollReactor = ({ onActivate }) => {
   const proximityScale = Math.max(0, Math.min(1, (150 - mouseDistance) / 150));
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex items-center justify-center z-50" style={{ minHeight: '120px', minWidth: '120px' }}>
       {/* Background glow */}
       <motion.div
-        className="absolute w-48 h-48 bg-purple-600/20 rounded-full blur-[60px]"
+        className="absolute w-48 h-48 bg-purple-600/20 rounded-full blur-[60px] z-0"
         animate={{
           scale: isHovered ? [1, 1.4, 1] : [1, 1.1, 1],
           opacity: isHovered ? [0.4, 0.7, 0.4] : [0.2, 0.4, 0.2],
