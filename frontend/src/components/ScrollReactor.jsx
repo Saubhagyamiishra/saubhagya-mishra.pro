@@ -72,10 +72,10 @@ const ScrollReactor = ({ onActivate }) => {
   const proximityScale = Math.max(0, Math.min(1, (150 - mouseDistance) / 150));
 
   return (
-    <div className="relative flex items-center justify-center" style={{ minHeight: '180px', minWidth: '180px', zIndex: 100 }}>
-      {/* Massive ambient glow layers */}
+    <div className="relative flex items-center justify-center" style={{ minHeight: '120px', minWidth: '120px', zIndex: 100 }}>
+      {/* Massive ambient glow layers - scaled for mobile */}
       <motion.div
-        className="absolute w-80 h-80 rounded-full blur-[100px]"
+        className="absolute w-48 h-48 md:w-80 md:h-80 rounded-full blur-[60px] md:blur-[100px]"
         style={{
           background: 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(6,182,212,0.2) 50%, transparent 70%)',
         }}
@@ -91,7 +91,7 @@ const ScrollReactor = ({ onActivate }) => {
       />
 
       <motion.div
-        className="absolute w-80 h-80 rounded-full blur-[100px]"
+        className="absolute w-48 h-48 md:w-80 md:h-80 rounded-full blur-[60px] md:blur-[100px]"
         style={{
           background: 'radial-gradient(circle, rgba(6,182,212,0.3) 0%, rgba(139,92,246,0.2) 50%, transparent 70%)',
         }}
@@ -107,19 +107,19 @@ const ScrollReactor = ({ onActivate }) => {
         }}
       />
 
-      {/* Concentric glowing rings - 3 layers */}
+      {/* Concentric glowing rings - 3 layers - responsive size */}
       {[0, 1, 2].map((i) => (
         <motion.div
           key={`ring-${i}`}
-          className="absolute rounded-full"
+          className="absolute rounded-full hidden sm:block"
           style={{
             border: '2px solid',
             borderColor: i % 2 === 0 ? 'rgba(139, 92, 246, 0.4)' : 'rgba(6, 182, 212, 0.4)',
           }}
-          initial={{ width: 100, height: 100, opacity: 0 }}
+          initial={{ width: 80, height: 80, opacity: 0 }}
           animate={{
-            width: isHovered ? [100, 240, 100] : [100, 200, 100],
-            height: isHovered ? [100, 240, 100] : [100, 200, 100],
+            width: isHovered ? [80, 200, 80] : [80, 160, 80],
+            height: isHovered ? [80, 200, 80] : [80, 160, 80],
             opacity: [0, 0.6, 0],
           }}
           transition={{
@@ -131,12 +131,12 @@ const ScrollReactor = ({ onActivate }) => {
         />
       ))}
 
-      {/* Hover particles */}
+      {/* Hover particles - fewer on mobile */}
       <AnimatePresence>
-        {particles.map((particle) => (
+        {particles.slice(0, window.innerWidth < 768 ? 6 : 12).map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute w-2 h-2 rounded-full"
+            className="absolute w-1.5 h-1.5 rounded-full hidden sm:block"
             style={{
               background: Math.random() > 0.5
                 ? 'radial-gradient(circle, #8b5cf6 0%, transparent 70%)'
@@ -180,9 +180,9 @@ const ScrollReactor = ({ onActivate }) => {
           scale: 1 + proximityScale * 0.1,
         }}
       >
-        {/* Premium glassmorphism orb with layers */}
+        {/* Premium glassmorphism orb with layers - responsive size */}
         <motion.div
-          className="relative w-28 h-28 rounded-full overflow-hidden"
+          className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden"
           style={{
             background: 'rgba(10, 10, 15, 0.8)',
             backdropFilter: 'blur(20px)',
@@ -318,7 +318,7 @@ const ScrollReactor = ({ onActivate }) => {
               }}
             >
               <ChevronDown 
-                className="w-8 h-8" 
+                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" 
                 style={{
                   color: '#fff',
                   filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.8))',
@@ -336,9 +336,44 @@ const ScrollReactor = ({ onActivate }) => {
           />
         </motion.div>
 
-        {/* Outer orbital rings */}
+        {/* Outer orbital rings - responsive */}
         <motion.div
           className="absolute inset-0 rounded-full"
+          style={{
+            border: '1px solid rgba(139, 92, 246, 0.4)',
+            width: '84px',
+            height: '84px',
+          }}
+          animate={{
+            rotate: [0, 360],
+            scale: isHovered ? [1, 1.05, 1] : 1,
+          }}
+          transition={{
+            rotate: { duration: 12, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+          }}
+        />
+
+        <motion.div
+          className="absolute inset-0 rounded-full"
+          style={{
+            border: '1px solid rgba(6, 182, 212, 0.4)',
+            width: '84px',
+            height: '84px',
+          }}
+          animate={{
+            rotate: [360, 0],
+            scale: isHovered ? [1.05, 1, 1.05] : 1,
+          }}
+          transition={{
+            rotate: { duration: 10, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 },
+          }}
+        />
+
+        {/* Desktop orbital rings */}
+        <motion.div
+          className="absolute inset-0 rounded-full hidden md:block"
           style={{
             border: '1px solid rgba(139, 92, 246, 0.4)',
             width: '112px',
@@ -355,7 +390,7 @@ const ScrollReactor = ({ onActivate }) => {
         />
 
         <motion.div
-          className="absolute inset-0 rounded-full"
+          className="absolute inset-0 rounded-full hidden md:block"
           style={{
             border: '1px solid rgba(6, 182, 212, 0.4)',
             width: '112px',
@@ -372,9 +407,9 @@ const ScrollReactor = ({ onActivate }) => {
         />
       </motion.div>
 
-      {/* Hint text */}
+      {/* Hint text - responsive sizing */}
       <motion.div
-        className="absolute -bottom-14 text-xs font-medium tracking-widest"
+        className="absolute -bottom-12 sm:-bottom-14 text-[10px] sm:text-xs font-medium tracking-widest"
         style={{
           background: 'linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)',
           WebkitBackgroundClip: 'text',
