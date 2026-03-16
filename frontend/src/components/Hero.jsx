@@ -271,21 +271,20 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Reactor Orb - Positioned at section intersection */}
+      {/* Scroll Reactor Orb - Centered with hero content */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         style={{ 
-          top: 'calc(100vh - 200px)',
           zIndex: 100
         }}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, scale: 0.8 }}
         animate={{ 
           opacity: 1, 
-          y: 0,
+          scale: 1,
         }}
         transition={{ 
           opacity: { duration: 0.8, delay: 1.2 },
-          y: { duration: 0.8, delay: 1.2 },
+          scale: { duration: 0.8, delay: 1.2 },
         }}
       >
         <ScrollReactor onActivate={handleReactorActivate} />
