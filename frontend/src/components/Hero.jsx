@@ -271,9 +271,9 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Reactor Orb - Positioned below hero buttons as transition element - Responsive */}
+      {/* Scroll Reactor Orb - Responsive positioning optimized for mobile */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 bottom-8 sm:bottom-16 md:bottom-24"
+        className="absolute left-1/2 -translate-x-1/2 bottom-20 sm:bottom-16 md:bottom-24"
         style={{ 
           zIndex: 100
         }}

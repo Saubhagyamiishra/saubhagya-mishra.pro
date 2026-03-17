@@ -72,10 +72,10 @@ const ScrollReactor = ({ onActivate }) => {
   const proximityScale = Math.max(0, Math.min(1, (150 - mouseDistance) / 150));
 
   return (
-    <div className="relative flex items-center justify-center" style={{ minHeight: '120px', minWidth: '120px', zIndex: 100 }}>
-      {/* Massive ambient glow layers - scaled for mobile */}
+    <div className="relative flex items-center justify-center" style={{ minHeight: '100px', minWidth: '100px', zIndex: 100 }}>
+      {/* Massive ambient glow layers - optimized for mobile */}
       <motion.div
-        className="absolute w-48 h-48 md:w-80 md:h-80 rounded-full blur-[60px] md:blur-[100px]"
+        className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-80 md:h-80 rounded-full blur-[40px] sm:blur-[60px] md:blur-[100px]"
         style={{
           background: 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(6,182,212,0.2) 50%, transparent 70%)',
         }}
@@ -91,7 +91,7 @@ const ScrollReactor = ({ onActivate }) => {
       />
 
       <motion.div
-        className="absolute w-48 h-48 md:w-80 md:h-80 rounded-full blur-[60px] md:blur-[100px]"
+        className="absolute w-32 h-32 sm:w-48 sm:h-48 md:w-80 md:h-80 rounded-full blur-[40px] sm:blur-[60px] md:blur-[100px]"
         style={{
           background: 'radial-gradient(circle, rgba(6,182,212,0.3) 0%, rgba(139,92,246,0.2) 50%, transparent 70%)',
         }}
@@ -180,9 +180,9 @@ const ScrollReactor = ({ onActivate }) => {
           scale: 1 + proximityScale * 0.1,
         }}
       >
-        {/* Premium glassmorphism orb with layers - responsive size */}
+        {/* Premium glassmorphism orb with layers - responsive size optimized for mobile */}
         <motion.div
-          className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden"
+          className="relative w-16 h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full overflow-hidden"
           style={{
             background: 'rgba(10, 10, 15, 0.8)',
             backdropFilter: 'blur(20px)',
@@ -318,7 +318,7 @@ const ScrollReactor = ({ onActivate }) => {
               }}
             >
               <ChevronDown 
-                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" 
+                className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8" 
                 style={{
                   color: '#fff',
                   filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.8))',
@@ -336,13 +336,13 @@ const ScrollReactor = ({ onActivate }) => {
           />
         </motion.div>
 
-        {/* Outer orbital rings - responsive */}
+        {/* Outer orbital rings - mobile optimized */}
         <motion.div
           className="absolute inset-0 rounded-full"
           style={{
             border: '1px solid rgba(139, 92, 246, 0.4)',
-            width: '84px',
-            height: '84px',
+            width: '68px',
+            height: '68px',
           }}
           animate={{
             rotate: [0, 360],
@@ -358,8 +358,43 @@ const ScrollReactor = ({ onActivate }) => {
           className="absolute inset-0 rounded-full"
           style={{
             border: '1px solid rgba(6, 182, 212, 0.4)',
-            width: '84px',
-            height: '84px',
+            width: '68px',
+            height: '68px',
+          }}
+          animate={{
+            rotate: [360, 0],
+            scale: isHovered ? [1.05, 1, 1.05] : 1,
+          }}
+          transition={{
+            rotate: { duration: 10, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 },
+          }}
+        />
+
+        {/* Tablet orbital rings */}
+        <motion.div
+          className="absolute inset-0 rounded-full hidden sm:block md:hidden"
+          style={{
+            border: '1px solid rgba(139, 92, 246, 0.4)',
+            width: '96px',
+            height: '96px',
+          }}
+          animate={{
+            rotate: [0, 360],
+            scale: isHovered ? [1, 1.05, 1] : 1,
+          }}
+          transition={{
+            rotate: { duration: 12, repeat: Infinity, ease: 'linear' },
+            scale: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+          }}
+        />
+
+        <motion.div
+          className="absolute inset-0 rounded-full hidden sm:block md:hidden"
+          style={{
+            border: '1px solid rgba(6, 182, 212, 0.4)',
+            width: '96px',
+            height: '96px',
           }}
           animate={{
             rotate: [360, 0],
