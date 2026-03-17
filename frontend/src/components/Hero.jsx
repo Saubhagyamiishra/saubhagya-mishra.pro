@@ -1,13 +1,11 @@
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 import InteractiveName from './InteractiveName';
-import ScrollReactor from './ScrollReactor';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const gridControls = useAnimation();
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -48,16 +46,6 @@ const Hero = () => {
       delay: Math.random() * 2,
     }))
   ];
-
-  // Handle scroll reactor activation
-  const handleReactorActivate = async () => {
-    // Trigger grid pulse animation
-    await gridControls.start({
-      opacity: [0.03, 0.15, 0.03],
-      scale: [1, 1.05, 1],
-      transition: { duration: 1.2, ease: 'easeInOut' }
-    });
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-[#0a0a0f] w-full max-w-[100vw] overflow-hidden">
@@ -271,24 +259,6 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Reactor Orb - Responsive positioning optimized for mobile */}
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 bottom-20 sm:bottom-16 md:bottom-24"
-        style={{ 
-          zIndex: 100
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-        }}
-        transition={{ 
-          opacity: { duration: 0.8, delay: 1.2 },
-          scale: { duration: 0.8, delay: 1.2 },
-        }}
-      >
-        <ScrollReactor onActivate={handleReactorActivate} />
-      </motion.div>
     </section>
   );
 };
