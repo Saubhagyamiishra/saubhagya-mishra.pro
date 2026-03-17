@@ -17,6 +17,7 @@ import { Toaster } from "@/components/ui/toaster";
 function App() {
   return (
     <BrowserRouter>
+      <CustomCursor />
       <Routes>
         {/* Admin Route */}
         <Route path="/admin" element={<AdminDashboard />} />
@@ -27,7 +28,6 @@ function App() {
           element={
             <LoadingScreenWrapper>
               <div className="App bg-[#0a0a0f] min-h-screen overflow-x-hidden w-full max-w-[100vw]">
-                <CustomCursor />
                 <Hero />
                 <About />
                 <Capabilities />
