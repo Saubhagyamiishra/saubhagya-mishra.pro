@@ -1,7 +1,6 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingScreenWrapper from "@/components/LoadingScreen";
-import CustomCursor from "@/components/CustomCursor";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Capabilities from "@/components/Capabilities";
@@ -17,7 +16,6 @@ import { Toaster } from "@/components/ui/toaster";
 function App() {
   return (
     <BrowserRouter>
-      <CustomCursor />
       <Routes>
         {/* Admin Route */}
         <Route path="/admin" element={<AdminDashboard />} />

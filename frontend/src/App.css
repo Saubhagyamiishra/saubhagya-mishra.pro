@@ -17,13 +17,6 @@ body {
     max-width: 100vw;
 }
 
-/* Hide default cursor only on desktop devices with fine pointer and hover capability */
-@media (pointer: fine) and (hover: hover) {
-    * {
-        cursor: none !important;
-    }
-}
-
 .App-logo {
     height: 40vmin;
     pointer-events: none;
