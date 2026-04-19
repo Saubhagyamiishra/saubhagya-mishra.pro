@@ -9,6 +9,24 @@ const FeaturedWork = () => {
   const websites = [
     {
       id: 1,
+      name: 'Mirsonics',
+      tagline: 'Premium health-tech platform for modern wellness',
+      category: 'Medical SaaS',
+      role: 'UX/UI Design & Web Development',
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80',
+      gradient: 'from-blue-600 to-cyan-500',
+      technologies: ['React', 'Health-Tech', 'UI/UX', 'Product Design'],
+      description: 'Designed and developed a premium digital health platform that blends modern wellness principles with intelligent user experience. Built with a focus on trust, clarity, and clinical precision, delivering a polished SaaS-style product presentation for the medical sector.',
+      highlights: [
+        'Clinical-grade interface design',
+        'Intelligent health data visualization',
+        'HIPAA-compliant architecture',
+        'Seamless patient experience'
+      ],
+      status: 'Live'
+    },
+    {
+      id: 2,
       name: 'E-Commerce Platform',
       tagline: 'Modern shopping experience with seamless checkout',
       category: 'Full Website',
@@ -26,7 +44,7 @@ const FeaturedWork = () => {
       status: 'Live'
     },
     {
-      id: 2,
+      id: 3,
       name: 'SaaS Landing Page',
       tagline: 'Conversion-focused landing experience',
       category: 'Landing Page',
@@ -44,7 +62,7 @@ const FeaturedWork = () => {
       status: 'Live'
     },
     {
-      id: 3,
+      id: 4,
       name: 'Portfolio Website',
       tagline: 'Interactive creative showcase',
       category: 'Portfolio Site',
@@ -62,7 +80,7 @@ const FeaturedWork = () => {
       status: 'In Development'
     },
     {
-      id: 4,
+      id: 5,
       name: 'Dashboard Application',
       tagline: 'Real-time analytics and data visualization',
       category: 'Web Application',
@@ -190,7 +208,7 @@ const FeaturedWork = () => {
 
                     {/* Website name */}
                     <div>
-                      <h3 className="text-3xl lg:text-4xl font-bold mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300">
+                      <h3 className="text-3xl lg:text-4xl font-bold mb-2 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300">
                         {website.name}
                       </h3>
                       <p className="text-gray-400 text-lg">
