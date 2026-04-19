@@ -23,7 +23,8 @@ const FeaturedWork = () => {
         'HIPAA-compliant architecture',
         'Seamless patient experience'
       ],
-      status: 'Live'
+      status: 'Live',
+      liveUrl: null // Coming Soon
     },
     {
       id: 2,
@@ -41,7 +42,8 @@ const FeaturedWork = () => {
         'Optimized checkout (45% conversion lift)',
         'Mobile-responsive design'
       ],
-      status: 'Live'
+      status: 'Live',
+      liveUrl: null // Coming Soon
     },
     {
       id: 3,
@@ -59,7 +61,8 @@ const FeaturedWork = () => {
         'Integrated analytics tracking',
         'A/B tested conversion flows'
       ],
-      status: 'Live'
+      status: 'Live',
+      liveUrl: null // Coming Soon
     },
     {
       id: 4,
@@ -77,7 +80,8 @@ const FeaturedWork = () => {
         'Dynamic project filtering',
         'Content management system'
       ],
-      status: 'In Development'
+      status: 'In Development',
+      liveUrl: null // Coming Soon
     },
     {
       id: 5,
@@ -95,7 +99,8 @@ const FeaturedWork = () => {
         'Custom widget builder',
         'Export & reporting tools'
       ],
-      status: 'Live'
+      status: 'Live',
+      liveUrl: null // Coming Soon
     },
   ];
 
