@@ -13,7 +13,7 @@ const FeaturedWork = () => {
       tagline: 'Premium health-tech platform for modern wellness',
       category: 'Medical SaaS',
       role: 'UX/UI Design & Web Development',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80',
+      image: 'https://customer-assets.emergentagent.com/job_saubhagya-nexus/artifacts/tvptjiih_Nano%20Banana%202%20-%20Create%20a%2011%20favicon%20for%20this%20website_%20_Mirsonics%20%281%29.png',
       gradient: 'from-blue-600 to-cyan-500',
       technologies: ['React', 'Health-Tech', 'UI/UX', 'Product Design'],
       description: 'Designed and developed a premium digital health platform that blends modern wellness principles with intelligent user experience. Built with a focus on trust, clarity, and clinical precision, delivering a polished SaaS-style product presentation for the medical sector.',
@@ -24,7 +24,7 @@ const FeaturedWork = () => {
         'Seamless patient experience'
       ],
       status: 'Live',
-      liveUrl: null // Coming Soon
+      liveUrl: 'https://www.mirsonics.com'
     },
     {
       id: 2,
@@ -239,19 +239,44 @@ const FeaturedWork = () => {
                       ))}
                     </div>
 
-                    {/* View details button */}
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedProject(website);
-                      }}
-                    >
-                      <span>View Details</span>
-                      <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-                    </motion.button>
+                    {/* Action buttons */}
+                    <div className="flex flex-wrap gap-3">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedProject(website);
+                        }}
+                      >
+                        <span>View Details</span>
+                        <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                      </motion.button>
+
+                      {/* Visit Website / Coming Soon button */}
+                      {website.liveUrl ? (
+                        <motion.a
+                          href={website.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="group/visit inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800/80 border border-gray-700 hover:border-purple-500/50 text-white font-medium hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>Visit Website</span>
+                          <ExternalLink className="w-4 h-4 group-hover/visit:translate-x-1 group-hover/visit:-translate-y-1 transition-transform" />
+                        </motion.a>
+                      ) : (
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-400 font-medium cursor-not-allowed"
+                        >
+                          <span>Coming Soon</span>
+                        </motion.div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -353,6 +378,21 @@ const FeaturedWork = () => {
                     ))}
                   </div>
                 </div>
+
+                {/* Visit Website CTA in modal */}
+                {selectedProject.liveUrl && (
+                  <motion.a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group/cta flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300"
+                  >
+                    <span>Visit Live Website</span>
+                    <ExternalLink className="w-5 h-5 group-hover/cta:translate-x-1 group-hover/cta:-translate-y-1 transition-transform" />
+                  </motion.a>
+                )}
               </div>
             </motion.div>
           </motion.div>
