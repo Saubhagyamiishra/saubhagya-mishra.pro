@@ -344,7 +344,7 @@ const ExperimentEngine = () => {
                         <motion.div className="absolute inset-0 pointer-events-none">
                           {Array.from({ length: 6 }).map((_, i) => (
                             <motion.div
-                              key={i}
+                              key={`neural-node-${i}`}
                               className="absolute w-1 h-1 rounded-full bg-purple-400"
                               style={{
                                 left: `${20 + i * 15}%`,
@@ -391,7 +391,7 @@ const ExperimentEngine = () => {
                         <motion.div className="absolute inset-0 pointer-events-none">
                           {Array.from({ length: 4 }).map((_, i) => (
                             <motion.div
-                              key={i}
+                              key={`microui-pulse-${i}`}
                               className="absolute w-2 h-2 rounded-full bg-amber-400"
                               style={{
                                 left: `${25 + i * 20}%`,
@@ -417,7 +417,7 @@ const ExperimentEngine = () => {
                           <div className="flex items-end gap-1 h-8">
                             {Array.from({ length: 8 }).map((_, i) => (
                               <motion.div
-                                key={i}
+                                key={`chart-bar-${i}`}
                                 className="flex-1 bg-gradient-to-t from-emerald-500 to-teal-400 rounded-t"
                                 animate={{
                                   height: ['20%', '80%', '20%'],

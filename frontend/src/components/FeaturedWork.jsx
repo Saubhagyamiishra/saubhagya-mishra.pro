@@ -250,9 +250,9 @@ const FeaturedWork = () => {
 
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2">
-                      {website.technologies.map((tech, i) => (
+                      {website.technologies.map((tech) => (
                         <span
-                          key={i}
+                          key={`${website.id}-tech-${tech}`}
                           className="px-3 py-1 rounded-lg bg-gray-800/50 border border-gray-700/50 text-xs text-gray-300 hover:border-purple-500/50 transition-colors"
                         >
                           {tech}
@@ -373,9 +373,9 @@ const FeaturedWork = () => {
                 <div>
                   <h4 className="text-xl font-semibold text-white mb-4">Key Features</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {selectedProject.highlights.map((highlight, i) => (
+                    {selectedProject.highlights.map((highlight) => (
                       <div
-                        key={i}
+                        key={`${selectedProject.id}-highlight-${highlight}`}
                         className="flex items-start gap-3 p-4 rounded-lg bg-gray-800/50 border border-gray-700/50"
                       >
                         <Zap className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
@@ -389,9 +389,9 @@ const FeaturedWork = () => {
                 <div>
                   <h4 className="text-xl font-semibold text-white mb-4">Technologies Used</h4>
                   <div className="flex flex-wrap gap-3">
-                    {selectedProject.technologies.map((tech, i) => (
+                    {selectedProject.technologies.map((tech) => (
                       <span
-                        key={i}
+                        key={`${selectedProject.id}-modal-tech-${tech}`}
                         className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-cyan-500/20 border border-purple-500/30 text-sm text-white font-medium"
                       >
                         {tech}

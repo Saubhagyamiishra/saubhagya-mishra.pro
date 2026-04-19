@@ -238,7 +238,7 @@ const AIContactForm = ({ onSuccess }) => {
               {/* Success particles */}
               {[...Array(12)].map((_, i) => (
                 <motion.div
-                  key={i}
+                  key={`success-particle-${i}`}
                   className="absolute w-2 h-2 rounded-full bg-emerald-400"
                   initial={{ x: 0, y: 0, opacity: 1 }}
                   animate={{
@@ -400,7 +400,7 @@ const AIContactForm = ({ onSuccess }) => {
                   const fileInfo = getFileIcon(file.type);
                   return (
                     <motion.div
-                      key={index}
+                      key={`${file.name}-${file.size}-${index}`}
                       layout
                       initial={{ opacity: 0, scale: 0.8, y: 20 }}
                       animate={{ 

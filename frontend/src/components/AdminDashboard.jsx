@@ -16,7 +16,7 @@ const AdminDashboard = () => {
   const [selectedSubmission, setSelectedSubmission] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const ADMIN_PASSWORD = 'admin2025'; // Simple password protection
+  const ADMIN_PASSWORD = process.env.REACT_APP_ADMIN_PASSWORD;
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -320,9 +320,9 @@ const AdminDashboard = () => {
                       Uploaded Files ({selectedSubmission.files.length})
                     </label>
                     <div className="space-y-2">
-                      {selectedSubmission.files.map((file, index) => (
+                      {selectedSubmission.files.map((file) => (
                         <div
-                          key={index}
+                          key={`${selectedSubmission.id}-file-${file}`}
                           className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg border border-gray-700"
                         >
                           <div className="flex items-center gap-3">
