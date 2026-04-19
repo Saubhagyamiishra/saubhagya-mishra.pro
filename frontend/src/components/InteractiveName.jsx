@@ -135,7 +135,7 @@ const Letter = ({ letter, index, mousePosition, isHovering, containerRect }) => 
         <>
           {[...Array(4)].map((_, i) => (
             <motion.div
-              key={i}
+              key={`proximity-particle-${i}`}
               className="absolute w-1.5 h-1.5 rounded-full pointer-events-none"
               style={{
                 top: '50%',

@@ -36,7 +36,7 @@ const LoadingScreen = ({ onLoadingComplete }) => {
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
           <motion.div
-            key={i}
+            key={`loading-particle-${i}`}
             className="absolute w-1 h-1 bg-purple-400 rounded-full"
             initial={{
               x: Math.random() * window.innerWidth,
