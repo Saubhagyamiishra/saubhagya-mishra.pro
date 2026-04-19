@@ -28,6 +28,27 @@ const FeaturedWork = () => {
     },
     {
       id: 2,
+      name: 'Inn of Joy',
+      tagline: 'Modern hotel website with robust admin panel',
+      category: 'Hospitality Tech',
+      role: 'Full Website & Admin System',
+      image: 'https://images.pexels.com/photos/7821345/pexels-photo-7821345.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      gradient: 'from-amber-600 to-orange-500',
+      technologies: ['Hotel Website', 'Admin Panel', 'Full Website', 'UX/UI', 'Website Management'],
+      description: 'A modern hotel website experience with a robust admin panel for managing content, operations, and the guest-facing digital experience. Built to empower hotel staff with full control over website content, room offerings, media assets, and operational updates while delivering a premium guest-facing booking experience.',
+      highlights: [
+        'Guest-facing booking website',
+        'Robust admin panel for content control',
+        'Room & offering management system',
+        'Media & asset management',
+        'Operational flexibility & updates',
+        'Premium hospitality brand experience'
+      ],
+      status: 'Live',
+      liveUrl: 'https://www.innofjoy.com'
+    },
+    {
+      id: 3,
       name: 'E-Commerce Platform',
       tagline: 'Modern shopping experience with seamless checkout',
       category: 'Full Website',
@@ -46,7 +67,7 @@ const FeaturedWork = () => {
       liveUrl: null // Coming Soon
     },
     {
-      id: 3,
+      id: 4,
       name: 'SaaS Landing Page',
       tagline: 'Conversion-focused landing experience',
       category: 'Landing Page',
@@ -65,7 +86,7 @@ const FeaturedWork = () => {
       liveUrl: null // Coming Soon
     },
     {
-      id: 4,
+      id: 5,
       name: 'Portfolio Website',
       tagline: 'Interactive creative showcase',
       category: 'Portfolio Site',
@@ -84,7 +105,7 @@ const FeaturedWork = () => {
       liveUrl: null // Coming Soon
     },
     {
-      id: 5,
+      id: 6,
       name: 'Dashboard Application',
       tagline: 'Real-time analytics and data visualization',
       category: 'Web Application',
