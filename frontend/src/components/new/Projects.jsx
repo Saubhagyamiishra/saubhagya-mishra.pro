@@ -9,7 +9,7 @@ const WaveformVisual = () => (
     <svg className="w-full h-32" viewBox="0 0 200 60" preserveAspectRatio="none">
       {[...Array(7)].map((_, i) => (
         <motion.path
-          key={i}
+          key={`waveform-${i}`}
           d={`M${i * 30},30 Q${i * 30 + 10},${20 + Math.random() * 20} ${i * 30 + 20},30 T${(i + 1) * 30},30`}
           fill="none"
           stroke="var(--accent)"
@@ -287,8 +287,8 @@ const ProjectModal = ({ project, onClose }) => {
             <div>
               <h4 className="font-fraunces text-xl font-medium text-ink mb-4">Results</h4>
               <div className="grid grid-cols-3 gap-4">
-                {project.results.map((result, i) => (
-                  <div key={i} className="p-4 bg-bg rounded-xl border border-line">
+                {project.results.map((result) => (
+                  <div key={`${project.id}-result-${result.label}`} className="p-4 bg-bg rounded-xl border border-line">
                     <div className="font-fraunces text-3xl font-medium text-accent mb-1">
                       {result.value}
                     </div>

@@ -200,7 +200,7 @@ export const Hero = () => {
             <div className="flex items-end gap-1 h-16">
               {[65, 78, 85, 92, 88, 95, 92].map((height, i) => (
                 <motion.div
-                  key={i}
+                  key={`funnel-bar-${i}`}
                   className={`flex-1 rounded-t ${i >= 5 ? 'bg-accent' : 'bg-ink/20'}`}
                   initial={{ height: 0 }}
                   animate={{ height: `${height}%` }}
