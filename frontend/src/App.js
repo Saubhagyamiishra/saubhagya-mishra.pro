@@ -1,46 +1,40 @@
 import "@/App.css";
+import "@/index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoadingScreenWrapper from "@/components/LoadingScreen";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Capabilities from "@/components/Capabilities";
-import FeaturedWork from "@/components/FeaturedWork";
-import Analytics from "@/components/Analytics";
-import Process from "@/components/Process";
-import ExperimentEngine from "@/components/ExperimentEngine";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import AdminDashboard from "@/components/AdminDashboard";
 import { Toaster } from "@/components/ui/toaster";
+
+// New MVP Components
+import { Navigation } from "@/components/new/Navigation";
+import { Hero } from "@/components/new/Hero";
+import { About } from "@/components/new/About";
+import { Projects } from "@/components/new/Projects";
+import { Contact } from "@/components/new/Contact";
+import { Footer } from "@/components/new/Footer";
+
+// Preserve existing Admin Dashboard
+import AdminDashboard from "@/components/AdminDashboard";
+
+function HomePage() {
+  return (
+    <div className="min-h-screen">
+      <Navigation />
+      <Hero />
+      <About />
+      <Projects />
+      <Contact />
+      <Footer />
+    </div>
+  );
+}
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Admin Route */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        
-        {/* Main Portfolio */}
-        <Route
-          path="/"
-          element={
-            <LoadingScreenWrapper>
-              <div className="App bg-[#0a0a0f] min-h-screen overflow-x-hidden w-full max-w-[100vw]">
-                <Hero />
-                <About />
-                <Capabilities />
-                <FeaturedWork />
-                <Analytics />
-                <Process />
-                <ExperimentEngine />
-                <Contact />
-                <Footer />
-                <Toaster />
-              </div>
-            </LoadingScreenWrapper>
-          }
-        />
       </Routes>
+      <Toaster />
     </BrowserRouter>
   );
 }
