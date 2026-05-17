@@ -34,7 +34,7 @@ export const Footer = () => {
             </h3>
             <p className="text-sm text-paper/60 leading-relaxed max-w-xs">
               Digital builder · Creative operator · Analytics thinker. Currently Director of
-              Digital Marketing at Mirsonics — building the next category in health-tech.
+              Digital Marketing at Mirsonics - building the next category in health-tech.
             </p>
           </div>
 

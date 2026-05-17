@@ -150,7 +150,7 @@ export const Contact = () => {
               className="text-lg text-ink-2 leading-relaxed max-w-xl"
             >
               Got a brand, website, app, dashboard, or automation system you want to bring to
-              life — or rebuild from scratch? Tell me what you're working on. I read every
+              life - or rebuild from scratch? Tell me what you're working on. I read every
               message.
             </motion.p>
 

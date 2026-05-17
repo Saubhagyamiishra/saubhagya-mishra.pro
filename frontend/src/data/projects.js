@@ -5,16 +5,16 @@ export const projectsData = [
     nameItalic: 'Mirsonics',
     subtitle: 'com',
     category: 'Healthtech · Product Experience',
-    year: '2024 — Now',
+    year: '2024 - Now',
     description:
-      "A health-tech digital experience built around Sonic Therapeutics™ — combining education, product storytelling, and a conversion-engineered funnel for a category we're actively defining.",
+      "A health-tech digital experience built around Sonic Therapeutics™ - combining education, product storytelling, and a conversion-engineered funnel for a category we're actively defining.",
     tags: ['React', 'Healthtech', 'UX/UI', 'Funnel', 'Web App'],
     url: 'https://mirsonics.com',
     gridSpan: 'lg:col-span-4',
     visual: 'waveform',
     role: 'Director of Digital Marketing. Owned strategy, UX, content architecture, conversion funnel, and analytics layer.',
     challenge:
-      'Introducing a brand-new therapeutic category requires more than a marketing site — it requires education, trust, scientific credibility, and a frictionless path from curiosity to product trial. The brand needed to feel both medical and human.',
+      'Introducing a brand-new therapeutic category requires more than a marketing site - it requires education, trust, scientific credibility, and a frictionless path from curiosity to product trial. The brand needed to feel both medical and human.',
     solution:
       'Built a React-based product experience that pairs editorial education content with a streamlined product funnel. Layered in a custom analytics dashboard, content automation, and conversion-engineered landing pages mapped to specific intent stages.',
     stack: 'React · Next.js · GA4 · Figma · Make · Custom CMS',
@@ -32,7 +32,7 @@ export const projectsData = [
     category: 'Hospitality · Brand',
     year: '2024',
     description:
-      'A hospitality brand site for a modern Noida hotel — built to earn trust on first scroll and convert into bookings.',
+      'A hospitality brand site for a modern Noida hotel - built to earn trust on first scroll and convert into bookings.',
     tags: ['Hospitality', 'Bookings', 'SEO'],
     url: 'https://innofjoy.com',
     gridSpan: 'lg:col-span-2',
@@ -59,7 +59,7 @@ export const projectsData = [
     category: 'Fashion · E-commerce',
     year: '2024',
     description:
-      'A streetwear & culture digital experience — fashion, artists, and drop-based collections built into one editorial commerce engine.',
+      'A streetwear & culture digital experience - fashion, artists, and drop-based collections built into one editorial commerce engine.',
     tags: ['Streetwear', 'E-com', 'Editorial'],
     url: null,
     gridSpan: 'lg:col-span-2',
@@ -67,9 +67,9 @@ export const projectsData = [
     gradientText: 'DMG//CTR',
     role: 'Creative direction, brand identity, e-commerce UX, and editorial structure.',
     challenge:
-      "Streetwear shoppers don't just buy product — they buy into culture. The challenge was to merge editorial storytelling with high-velocity drop commerce, without diluting either.",
+      "Streetwear shoppers don't just buy product - they buy into culture. The challenge was to merge editorial storytelling with high-velocity drop commerce, without diluting either.",
     solution:
-      'A magazine-style commerce experience: artist features, drop previews, and a fast checkout — wrapped in a high-contrast brand identity that scales from product page to lookbook.',
+      'A magazine-style commerce experience: artist features, drop previews, and a fast checkout - wrapped in a high-contrast brand identity that scales from product page to lookbook.',
     stack: 'Shopify · Custom Theme · Editorial CMS · Motion',
     results: [
       { label: 'Avg Order Value', value: '+147%' },
@@ -85,7 +85,7 @@ export const projectsData = [
     category: 'Game · Interactive',
     year: '2025',
     description:
-      'An immersive game concept — dark storytelling, atmospheric design, and interactive worldbuilding in Chapter I.',
+      'An immersive game concept - dark storytelling, atmospheric design, and interactive worldbuilding in Chapter I.',
     tags: ['Game Design', 'Narrative', 'Worldbuilding'],
     url: null,
     gridSpan: 'lg:col-span-2',
@@ -94,7 +94,7 @@ export const projectsData = [
     challenge:
       "Telling a story-first game concept in a medium dominated by mechanics-first design. The Vale needed to feel like a place, not a level.",
     solution:
-      'A vertical slice of Chapter I — a moody, painterly walking experience with environmental storytelling, audio direction, and minimal UI that respects the player\'s attention.',
+      'A vertical slice of Chapter I - a moody, painterly walking experience with environmental storytelling, audio direction, and minimal UI that respects the player\'s attention.',
     stack: 'Unity · Custom Shaders · Sound Design · Narrative Design',
     results: [
       { label: 'Chapter I', value: 'Released' },
@@ -117,7 +117,7 @@ export const projectsData = [
     visual: 'conic',
     role: 'Founder · Product · Engineering · Design.',
     challenge:
-      'Most analytics tools tell you what happened. The interesting problem is building one that tells you what to do next — and then does some of it for you.',
+      'Most analytics tools tell you what happened. The interesting problem is building one that tells you what to do next - and then does some of it for you.',
     solution:
       'In development. Sign up for early access via the contact form below.',
     stack: 'React · LLMs · Vector DB · Custom Pipelines',

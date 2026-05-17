@@ -331,7 +331,7 @@ export const Projects = () => {
           transition={{ duration: 0.6 }}
           className="label-mono text-muted mb-6"
         >
-          Selected Work · 2023 — 2026
+          Selected Work · 2023 - 2026
         </motion.div>
 
         {/* Title */}

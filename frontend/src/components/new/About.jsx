@@ -82,14 +82,14 @@ export const About = () => {
                 <span className="relative z-10 font-medium text-ink">Mirsonics</span>
                 <span className="absolute bottom-0 left-0 right-0 h-2 bg-accent/20" />
               </span>
-              , a health-tech company pioneering Sonic Therapeutics™ — a new category at the
+              , a health-tech company pioneering Sonic Therapeutics™ - a new category at the
               intersection of sound science and wellness technology.
             </p>
 
             <p className="text-lg text-ink-2 leading-relaxed">
               I don't just write strategy decks or hand off wireframes. I{' '}
-              <span className="font-medium text-ink">build the actual systems</span> — the
-              websites, the dashboards, the automation flows, the conversion funnels — and then I
+              <span className="font-medium text-ink">build the actual systems</span> - the
+              websites, the dashboards, the automation flows, the conversion funnels - and then I
               optimize them based on real performance data.
             </p>
 
@@ -98,11 +98,11 @@ export const About = () => {
               <span className="font-medium text-ink">creative building</span>,{' '}
               <span className="font-medium text-ink">analytical strategy</span>, and{' '}
               <span className="font-medium text-ink">marketing execution</span>. If it compounds
-              — if it gets better with time, data, and iteration — I'm interested.
+              - if it gets better with time, data, and iteration - I'm interested.
             </p>
 
             <div className="pt-6 border-t border-line">
-              <p className="font-instrument italic text-2xl text-ink mb-1">— Saubhagya</p>
+              <p className="font-instrument italic text-2xl text-ink mb-1">- Saubhagya</p>
               <p className="text-sm text-muted">
                 Director of Digital Marketing · Mirsonics
               </p>

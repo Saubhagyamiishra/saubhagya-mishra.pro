@@ -86,7 +86,7 @@ export const Hero = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg text-ink-2 max-w-xl leading-relaxed"
             >
-              Websites, web apps, dashboards, automation systems, and growth engines —
+              Websites, web apps, dashboards, automation systems, and growth engines -
               designed at the intersection of creativity, strategy, and relentless execution.
             </motion.p>
           </div>
