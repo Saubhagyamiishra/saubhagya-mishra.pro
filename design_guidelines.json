@@ -1,0 +1,112 @@
+{
+  "theme": "light",
+  "typography": {
+    "headings": {
+      "font_family": "Fraunces, serif",
+      "font_weights": [300, 400, 500, 600, 700],
+      "usage": "Primary large headings, elegant titles. Tracking should be tight (tracking-tighter)."
+    },
+    "accent_italic": {
+      "font_family": "Instrument Serif, serif",
+      "font_style": "italic",
+      "usage": "Inline italic accents inside headings, decorative elements."
+    },
+    "body": {
+      "font_family": "Geist, sans-serif",
+      "font_weights": [300, 400, 500, 600, 700],
+      "usage": "All paragraph text, UI text, labels. Tracking normal to relaxed."
+    },
+    "mono": {
+      "font_family": "Geist Mono, monospace",
+      "usage": "Overlines, dates, code blocks, technical stats. MUST use uppercase and wide tracking (tracking-[0.2em])."
+    }
+  },
+  "colors": {
+    "background": {
+      "main": "#f4f1ea",
+      "secondary": "#ebe6dc",
+      "paper": "#fbf9f4"
+    },
+    "text": {
+      "ink": "#0f0e0d",
+      "ink_muted": "#2a2723",
+      "muted": "#6a655d"
+    },
+    "accents": {
+      "primary": "#ff5a1f",
+      "secondary": "#ffb547",
+      "glow": "rgba(255,90,31,0.20)",
+      "success": "#2f7d4f"
+    },
+    "borders": {
+      "light": "rgba(26,24,22,0.05)",
+      "strong": "rgba(26,24,22,0.10)"
+    }
+  },
+  "visual_enhancers": {
+    "grain_overlay": "Fixed SVG noise overlay spanning viewport, pointer-events-none, mix-blend-multiply, opacity-50. Implementation: absolute inset-0 with an SVG pattern.",
+    "glassmorphism": "backdrop-blur-xl (20px), backdrop-saturate-150, bg-paper/70, 1px solid border-light.",
+    "shadows": {
+      "soft": "0 1px 2px rgba(15,14,13,.06)",
+      "elevated": "0 20px 60px rgba(15,14,13,.08)"
+    },
+    "borders": "1px solid var(--line) or var(--line-strong), no generic shadows, rely on contrast."
+  },
+  "grids_layouts": {
+    "philosophy": "High asymmetry, 'Bento' Grid Mode A, generous negative space. Center-aligned text ONLY for very deliberate artistic moments, otherwise left-aligned.",
+    "spacing_scale": "p-4, p-6, p-8, p-12, p-16, p-24, p-32, p-48, p-64. Containers with border must use internal p-8 or p-12.",
+    "grid_examples": "1x2, 2x3 OS cards, 4x3 capabilities with cursor spotlight, asymmetric 3D tilt grids for projects."
+  },
+  "motion_interactions": {
+    "smooth_scroll": "Lenis.js for momentum scrolling. Add 'weight' to the scroll feel.",
+    "cursor_spotlight": "Track mouse position in wrapper, update background radial-gradient(circle at x y, rgba(255,90,31,0.1) 0%, transparent 80%).",
+    "card_tilt": "Framer-motion useMotionValue, useTransform for subtle rotateX/rotateY on hover.",
+    "marquee": "react-fast-marquee or framer-motion infinite loop. The 'Kinetic Texture' approach.",
+    "parallax": "Use scroll() and useTransform() from framer-motion for drifting hero orbs and slow scroll elements."
+  },
+  "components_and_sections": {
+    "sticky_navigation": "Glassmorphic (bg-[#fbf9f4]/70, backdrop-blur-xl). Shrinks y-padding on scroll. Pill-shaped links.",
+    "hero_section": "Full viewport (h-screen). Drifting gradient orbs in background (blur-3xl). Floating stats cards with soft shadow.",
+    "infinite_marquee": "Black background (#0f0e0d), cream text (#fbf9f4), bold Fraunces mixed with Instrument Serif. Seamless loop.",
+    "about_os": "Paper bg (#fbf9f4), 2x3 grid. Bento style cards.",
+    "capabilities": "4x3 grid. Mouse tracking spotlight on borders. Highlight the structural grid.",
+    "featured_projects": "Asymmetric grid. Cards tilt on hover. Projects: Mirsonics.com, Innofjoy.com, Damage Culture, The Hollow Vale, AI/Automation.",
+    "project_modal": "AnimatePresence full-screen overlay. Detailed content inside paper-colored panel.",
+    "results_dashboard": "3-column KPI cards. SVGs that animate via framer-motion pathLength when in view.",
+    "process_timeline": "6-step horizontal line with an active 'fill' indicator.",
+    "the_lab": "4x2 grid of experiments. Status pills (Geist Mono, uppercase, small, tracked out).",
+    "testimonials": "3-column quote cards, italic Fraunces for the quotes.",
+    "contact_form": "PRESERVE EXISTING LOGIC. Redesign visual layer only. Form fields must map exactly to current backend.",
+    "footer": "4-column setup. Massive 'watermark' text at bottom (text-[15vw] Fraunces)."
+  },
+  "media": {
+    "strategy": "SVG-based visuals. NO external images as per spec. Use geometric shapes, path animations, and Phosphor/Lucide icons."
+  },
+  "image_urls": [],
+  "instructions_to_main_agent": [
+    "PRESERVE all backend APIs, form logic, auth, and dashboard logic exactly as they are.",
+    "USE JS instead of TS. The project is Vite + React + Tailwind + JS.",
+    "Add 'data-testid' to all interactive elements.",
+    "Install 'framer-motion', '@phosphor-icons/react', 'lucide-react', 'react-fast-marquee', '@studio-freight/react-lenis', 'clsx', 'tailwind-merge'.",
+    "Implement the UI directly using Tailwind CSS and standard React components.",
+    "Ensure the contact form logic uses existing React states and POSTs correctly.",
+    "Use named exports for components, default exports for pages."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic outputs. Avoid 'AI slop'. Make creative, distinctive frontends that surprise and delight.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition (`transition: all`). This breaks transforms. Apply specific transitions.",
+    "You MUST NOT center align the app container. Do not add `.App { text-align: center; }`.",
+    "Always use modern button styles like pill-shaped, or sharp buttons with interaction animations.",
+    "NEVER use emojis for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, custom cursors, and loading animations separate good from extraordinary.",
+    "Prioritize using pre-existing components from src/components/ui when applicable.",
+    "Components MUST use named exports (export const ComponentName = ...).",
+    "Pages MUST use default exports (export default function PageName() {...}).",
+    "Use sonner for toasts."
+  ]
+}
