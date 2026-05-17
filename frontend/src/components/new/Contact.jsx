@@ -163,18 +163,18 @@ export const Contact = () => {
               className="space-y-4"
             >
               <a
-                href="mailto:hello@saubhagyamishra.com"
+                href="mailto:saubhagyamiishra@gmail.com"
                 className="group flex items-center gap-4 p-4 bg-paper rounded-2xl border border-line hover:border-accent hover:translate-x-2 transition-all duration-300"
               >
                 <Envelope weight="duotone" className="w-6 h-6 text-ink" />
                 <div>
                   <div className="label-mono text-muted text-[10px] mb-1">Email</div>
-                  <div className="text-ink font-medium">hello@saubhagyamishra.com</div>
+                  <div className="text-ink font-medium">saubhagyamiishra@gmail.com</div>
                 </div>
               </a>
 
               <a
-                href="https://linkedin.com/in/saubhagyamishra"
+                href="https://www.linkedin.com/in/saubhagya-mishra-16867718b/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-4 p-4 bg-paper rounded-2xl border border-line hover:border-accent hover:translate-x-2 transition-all duration-300"
@@ -182,7 +182,7 @@ export const Contact = () => {
                 <LinkedinLogo weight="duotone" className="w-6 h-6 text-ink" />
                 <div>
                   <div className="label-mono text-muted text-[10px] mb-1">LinkedIn</div>
-                  <div className="text-ink font-medium">/in/saubhagyamishra</div>
+                  <div className="text-ink font-medium">/in/saubhagya-mishra-16867718b</div>
                 </div>
               </a>
 

@@ -59,7 +59,7 @@ export const Footer = () => {
             <h4 className="label-mono text-paper/40 mb-6">Connect</h4>
             <nav className="space-y-3">
               <a
-                href="https://linkedin.com/in/saubhagyamishra"
+                href="https://www.linkedin.com/in/saubhagya-mishra-16867718b/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-paper/80 hover:text-accent hover:translate-x-1 transition-all duration-200"
@@ -68,7 +68,7 @@ export const Footer = () => {
                 <span>LinkedIn</span>
               </a>
               <a
-                href="https://instagram.com/saubhagyamishra"
+                href="https://www.instagram.com/saubhagyamiishra/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-paper/80 hover:text-accent hover:translate-x-1 transition-all duration-200"
@@ -77,7 +77,7 @@ export const Footer = () => {
                 <span>Instagram</span>
               </a>
               <a
-                href="https://github.com/saubhagyamishra"
+                href="https://github.com/dead6shot9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-paper/80 hover:text-accent hover:translate-x-1 transition-all duration-200"
@@ -86,7 +86,7 @@ export const Footer = () => {
                 <span>GitHub</span>
               </a>
               <a
-                href="mailto:hello@saubhagyamishra.com"
+                href="mailto:saubhagyamiishra@gmail.com"
                 className="flex items-center gap-2 text-paper/80 hover:text-accent hover:translate-x-1 transition-all duration-200"
               >
                 <Envelope weight="fill" className="w-4 h-4" />
