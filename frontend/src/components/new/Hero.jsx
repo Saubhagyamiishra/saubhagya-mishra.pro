@@ -75,7 +75,7 @@ export const Hero = () => {
               <span className="font-instrument italic">high-performance</span>{' '}
               <span className="relative inline-block">
                 <span className="relative z-10">digital</span>
-                <span className="absolute bottom-1 left-0 right-0 h-3 bg-accent/20 -skew-x-12 -z-0" />
+                <span className="absolute -bottom-1 left-0 right-0 h-[6px] bg-accent/30 -skew-x-6 rounded-sm" />
               </span>{' '}
               experiences that compound.
             </motion.h1>
@@ -121,19 +121,19 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex items-center gap-6 pt-6 border-l-2 border-accent pl-6"
+            className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-l-2 border-accent pl-4 sm:pl-6"
           >
             <div>
-              <div className="font-fraunces text-2xl font-medium text-ink">12+</div>
-              <div className="text-xs text-muted">Digital Systems Built</div>
+              <div className="font-fraunces text-xl sm:text-2xl font-medium text-ink">12+</div>
+              <div className="text-[10px] sm:text-xs text-muted">Digital Systems Built</div>
             </div>
             <div>
-              <div className="font-fraunces text-2xl font-medium text-ink">240%</div>
-              <div className="text-xs text-muted">Avg Engagement Lift</div>
+              <div className="font-fraunces text-xl sm:text-2xl font-medium text-ink">240%</div>
+              <div className="text-[10px] sm:text-xs text-muted">Avg Engagement Lift</div>
             </div>
             <div>
-              <div className="font-fraunces text-2xl font-medium text-ink">6 yrs</div>
-              <div className="text-xs text-muted">Building & Operating</div>
+              <div className="font-fraunces text-xl sm:text-2xl font-medium text-ink">6 yrs</div>
+              <div className="text-[10px] sm:text-xs text-muted">Building & Operating</div>
             </div>
           </motion.div>
         </div>
@@ -243,7 +243,7 @@ export const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
       >
         <span className="label-mono text-muted text-[10px]">Scroll to explore</span>
         <motion.div
