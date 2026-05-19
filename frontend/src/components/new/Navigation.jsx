@@ -42,11 +42,12 @@ export const Navigation = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center gap-3 group"
             >
-              <div className="relative w-7 h-7 rounded-lg bg-ink overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent to-accent-2 mix-blend-overlay opacity-80" />
-                <div className="absolute inset-0 flex items-center justify-center text-paper text-xs font-fraunces font-semibold">
-                  SM
-                </div>
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_saubhagya-nexus/artifacts/4od42g09_ChatGPT%20Image%20May%2019%2C%202026%2C%2012_40_22%20AM.png"
+                  alt="SM Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-fraunces font-medium text-ink text-lg hidden sm:block">
                 Saubhagya Mishra
