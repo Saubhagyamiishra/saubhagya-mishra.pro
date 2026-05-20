@@ -63,7 +63,7 @@ export const About = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-fraunces text-4xl sm:text-5xl lg:text-6xl font-light leading-tight tracking-tight text-ink max-w-4xl mb-16"
         >
-          A marketer who builds. A builder who thinks like an analyst.
+          Hey there, welcome.
         </motion.h2>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -76,29 +76,25 @@ export const About = () => {
             className="space-y-6"
           >
             <p className="text-lg text-ink-2 leading-relaxed">
-              I'm <span className="font-medium text-ink">Saubhagya Mishra</span>, Director of
-              Digital Marketing at{' '}
+              I'm <span className="font-medium text-ink">Saubhagya Mishra</span>, a builder who reads
+              too much, thinks too deeply, and refuses to sit still. Books fuel the mind, football
+              fuels the soul, and if you catch me mid-sentence about either, clear your schedule.
+            </p>
+
+            <p className="text-lg text-ink-2 leading-relaxed">
+              Right now I'm building{' '}
               <span className="relative inline-block">
-                <span className="relative z-10 font-medium text-ink">Mirsonics</span>
+                <span className="relative z-10 font-medium text-ink">Jarvislive</span>
                 <span className="absolute bottom-0 left-0 right-0 h-2 bg-accent/20" />
               </span>
-              , a health-tech company pioneering Sonic Therapeutics™ - a new category at the
-              intersection of sound science and wellness technology.
+              , a personal AI automation system powered by n8n + Claude Code. It's equal parts
+              ambition and chaos, and honestly? That's the best kind of project.
             </p>
 
             <p className="text-lg text-ink-2 leading-relaxed">
-              I don't just write strategy decks or hand off wireframes. I{' '}
-              <span className="font-medium text-ink">build the actual systems</span> - the
-              websites, the dashboards, the automation flows, the conversion funnels - and then I
-              optimize them based on real performance data.
-            </p>
-
-            <p className="text-lg text-ink-2 leading-relaxed">
-              My work lives at the intersection of{' '}
-              <span className="font-medium text-ink">creative building</span>,{' '}
-              <span className="font-medium text-ink">analytical strategy</span>, and{' '}
-              <span className="font-medium text-ink">marketing execution</span>. If it compounds
-              - if it gets better with time, data, and iteration - I'm interested.
+              I love automations, love building new things from scratch, and I'm always chasing that
+              next rabbit hole, whether it's a new tech stack, a framework, or just a genuinely{' '}
+              <span className="font-instrument italic">weird idea</span> that might actually work.
             </p>
 
             <div className="pt-6 border-t border-line">
