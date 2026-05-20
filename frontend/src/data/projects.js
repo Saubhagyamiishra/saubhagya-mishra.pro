@@ -60,21 +60,21 @@ export const projectsData = [
     year: '2024',
     description:
       'A streetwear & culture digital experience - fashion, artists, and drop-based collections built into one editorial commerce engine.',
-    tags: ['Streetwear', 'E-com', 'Editorial'],
-    url: null,
+    tags: ['React.js', 'E-commerce', 'Admin Panel', 'Inventory Management'],
+    url: 'https://damageculture.com/',
     gridSpan: 'lg:col-span-2',
     visual: 'gradient-text',
     gradientText: 'DMG//CTR',
-    role: 'Creative direction, brand identity, e-commerce UX, and editorial structure.',
+    role: 'Full-Stack Development & E-commerce Architecture. Built for Kartikey.',
     challenge:
-      "Streetwear shoppers don't just buy product - they buy into culture. The challenge was to merge editorial storytelling with high-velocity drop commerce, without diluting either.",
+      'Creating a premium streetwear e-commerce platform that feels like a culture magazine while handling complex inventory, orders, and customer management. The platform needed to be fast, scalable, and operationally efficient for both customers and admin users.',
     solution:
-      'A magazine-style commerce experience: artist features, drop previews, and a fast checkout - wrapped in a high-contrast brand identity that scales from product page to lookbook.',
-    stack: 'Shopify · Custom Theme · Editorial CMS · Motion',
+      'Built a full-stack e-commerce experience using React.js and JavaScript with a robust admin panel for complete operational control. The store features real-time order tracking, advanced product management with drag-and-drop image handling, inventory control, customer management, and analytics dashboards. The architecture was designed for scalability with reusable component systems, efficient state management, and seamless integration between storefront and backend.',
+    stack: 'React.js · JavaScript · Admin Panel · E-commerce Architecture',
     results: [
-      { label: 'Avg Order Value', value: '+147%' },
-      { label: 'Returning Buyers', value: '+92%' },
-      { label: 'Avg Session Time', value: '4.7m' },
+      { label: 'Order Management', value: 'Real-time' },
+      { label: 'Product System', value: 'Scalable' },
+      { label: 'Admin Control', value: 'Complete' },
     ],
   },
   {
