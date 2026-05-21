@@ -9,9 +9,10 @@ export const Navigation = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, []); // Empty deps is correct - handleScroll doesn't capture external values
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
