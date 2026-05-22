@@ -16,6 +16,7 @@ import { TheLab } from "@/components/new/TheLab";
 import { Testimonials } from "@/components/new/Testimonials";
 import { Contact } from "@/components/new/Contact";
 import { Footer } from "@/components/new/Footer";
+import { InkCursor } from "@/components/new/InkCursor";
 
 // Preserve existing Admin Dashboard
 import AdminDashboard from "@/components/AdminDashboard";
@@ -23,6 +24,7 @@ import AdminDashboard from "@/components/AdminDashboard";
 function HomePage() {
   return (
     <div className="min-h-screen">
+      <InkCursor />
       <Navigation />
       <Hero />
       <InfiniteMarquee />
