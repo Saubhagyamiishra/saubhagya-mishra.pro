@@ -22,6 +22,7 @@ const AUTO_INTERVAL_MS = 2600;
 export const Capabilities = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [userTookOver, setUserTookOver] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [inView, setInView] = useState(false);
   const sectionRef = useRef(null);
   const intervalRef = useRef(null);
@@ -38,9 +39,9 @@ export const Capabilities = () => {
     return () => obs.disconnect();
   }, []);
 
-  // Auto-advance loop
+  // Auto-advance loop — paused if user took over, paused manually, or out of view
   useEffect(() => {
-    if (userTookOver || !inView) {
+    if (userTookOver || isPaused || !inView) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       return;
     }
@@ -48,15 +49,49 @@ export const Capabilities = () => {
       setActiveIndex((i) => (i + 1) % capabilities.length);
     }, AUTO_INTERVAL_MS);
     return () => clearInterval(intervalRef.current);
-  }, [userTookOver, inView]);
+  }, [userTookOver, isPaused, inView]);
 
   const handoff = useCallback((idx) => {
     setActiveIndex(idx);
     setUserTookOver(true);
   }, []);
 
+  // Keyboard navigation — only when section is in view and not typing in an input
+  useEffect(() => {
+    if (!inView) return undefined;
+    const onKey = (e) => {
+      const tag = (e.target?.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        setUserTookOver(true);
+        setActiveIndex((i) => (i + 1) % capabilities.length);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setUserTookOver(true);
+        setActiveIndex((i) => (i - 1 + capabilities.length) % capabilities.length);
+      } else if (e.key === ' ' && document.activeElement === document.body) {
+        e.preventDefault();
+        setIsPaused((p) => !p);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [inView]);
+
+  const togglePlayback = () => {
+    if (userTookOver) {
+      // Resume auto-cycle
+      setUserTookOver(false);
+      setIsPaused(false);
+    } else {
+      setIsPaused((p) => !p);
+    }
+  };
+
   const active = capabilities[activeIndex];
   const ActiveVisual = VisualMap[active.id];
+  const isAutoPlaying = !userTookOver && !isPaused && inView;
 
   return (
     <section
@@ -220,18 +255,40 @@ export const Capabilities = () => {
               data-testid="capabilities-stage"
               onMouseEnter={() => setUserTookOver(true)}
             >
-              {/* Tag */}
-              <div className="flex items-center gap-3 mb-4">
+              {/* Tag + playback controls */}
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/40 bg-accent/5 label-mono text-[10px] text-accent">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   {active.code} · ACTIVE
                 </span>
-                {!userTookOver && inView && (
-                  <span className="label-mono text-[9px] text-muted">AUTO · CYCLING</span>
-                )}
-                {userTookOver && (
-                  <span className="label-mono text-[9px] text-muted">MANUAL CONTROL</span>
-                )}
+
+                {/* Play / Pause button */}
+                <button
+                  type="button"
+                  data-testid="capability-play-toggle"
+                  onClick={togglePlayback}
+                  aria-label={isAutoPlaying ? 'Pause autoplay' : 'Resume autoplay'}
+                  className="group inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-line-strong hover:border-ink/40 bg-paper hover:bg-bg-2 transition-all"
+                >
+                  {isAutoPlaying ? (
+                    <svg width="9" height="10" viewBox="0 0 9 10" fill="none" aria-hidden>
+                      <rect x="0" y="0" width="3" height="10" rx="0.5" fill="currentColor" />
+                      <rect x="6" y="0" width="3" height="10" rx="0.5" fill="currentColor" />
+                    </svg>
+                  ) : (
+                    <svg width="9" height="10" viewBox="0 0 9 10" fill="none" aria-hidden>
+                      <path d="M0 0 L9 5 L0 10 Z" fill="currentColor" />
+                    </svg>
+                  )}
+                  <span className="label-mono text-[9px] text-ink-2 group-hover:text-ink">
+                    {isAutoPlaying ? 'PAUSE' : userTookOver ? 'RESUME AUTO' : 'PLAY'}
+                  </span>
+                </button>
+
+                {/* Position counter */}
+                <span className="label-mono text-[9px] text-muted ml-auto">
+                  {String(activeIndex + 1).padStart(2, '0')} / {capabilities.length}
+                </span>
               </div>
 
               {/* Large faded index */}
@@ -297,6 +354,15 @@ export const Capabilities = () => {
                     ].join(' ')}
                   />
                 ))}
+              </div>
+
+              {/* Keyboard hint */}
+              <div className="mt-5 flex items-center gap-2 text-muted">
+                <kbd className="px-1.5 py-0.5 rounded border border-line-strong bg-paper label-mono text-[9px] text-ink-2">←</kbd>
+                <kbd className="px-1.5 py-0.5 rounded border border-line-strong bg-paper label-mono text-[9px] text-ink-2">→</kbd>
+                <span className="label-mono text-[9px]">to navigate ·</span>
+                <kbd className="px-1.5 py-0.5 rounded border border-line-strong bg-paper label-mono text-[9px] text-ink-2">SPACE</kbd>
+                <span className="label-mono text-[9px]">to pause</span>
               </div>
             </div>
           </div>

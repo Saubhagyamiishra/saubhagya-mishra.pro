@@ -29,6 +29,7 @@ export const Contact = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -86,7 +87,14 @@ export const Contact = () => {
       });
 
       if (response.data.success) {
+        setSuccessMessage(response.data.message || "Message sent! I'll get back to you soon.");
         setShowSuccess(true);
+        toast({
+          title: 'Message received',
+          description: response.data.submission_id
+            ? `Reference · ${response.data.submission_id.slice(-8)}`
+            : "I'll reply within 48 hours.",
+        });
         setTimeout(() => {
           setFormData({
             name: '',
@@ -226,7 +234,9 @@ export const Contact = () => {
                     <h3 className="font-fraunces text-3xl font-medium text-ink mb-2">
                       Message sent!
                     </h3>
-                    <p className="text-ink-2">I'll get back to you soon.</p>
+                    <p className="text-ink-2 max-w-xs mx-auto">
+                      {successMessage || "I'll get back to you soon."}
+                    </p>
                   </motion.div>
                 </motion.div>
               )}

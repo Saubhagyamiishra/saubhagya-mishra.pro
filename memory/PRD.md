@@ -19,7 +19,7 @@ Timeline · Lab · Testimonials · Contact · Footer · InkCursor.
 ## Completed Work
 - 2026-02 — Complete UI redesign to Editorial Tech Lab theme
 - 2026-02 — New projects: Mirsonics, Inn of Joy, Damage Culture
-- 2026-02 — Trailing Ink Streak Cursor (Canvas, desktop fine-pointer only)
+- 2026-02 — Trailing Ink Streak Cursor (verified working in production)
 - 2026-02 — Hero mobile fix + underline refinement; favicon + nav logo
 - 2026-02 — Code review pass, 15 unused legacy components removed
 - 2026-02 — **Capabilities Section Restructured into split-panel interactive layout**
@@ -32,6 +32,12 @@ Timeline · Lab · Testimonials · Contact · Footer · InkCursor.
     line chart draw, brand badge).
   - Auto-advance every 2.6s via IntersectionObserver; permanent handoff on hover/click.
   - Responsive: collapses to single column at ≤1024px, stage moves above list.
+- 2026-02 — **Capabilities playback controls**: PAUSE / RESUME AUTO toggle button,
+  keyboard navigation (←/→ to step, SPACE to pause), position counter `NN / 12`,
+  and visible kbd hint chip below progress dots.
+- 2026-02 — **Contact form roundtrip polished**: now surfaces real backend
+  `submission_id` (last 8 chars) in toast and shows backend's `response.data.message`
+  in success overlay. Verified end-to-end (MongoDB persistence confirmed).
 
 ## Files of Reference
 - `/app/frontend/src/components/new/Capabilities.jsx` — split-panel logic
@@ -51,9 +57,9 @@ Timeline · Lab · Testimonials · Contact · Footer · InkCursor.
 - `GET  /api/contact/submissions`
 
 ## Roadmap
-- **P2** Verify Ink Streak Cursor visibility in production (user noted not seeing it earlier)
+- **P2** Optional: enable SMTP env vars in `backend/.env` to turn on email notifications
 - **P2** Potential: add scroll-progress narrative panel next to Timeline section
-- **P3** Convert mocked contact-form success state to real backend roundtrip on the new design
+- **P3** Add lightweight rate-limit middleware on `/api/contact` (prevent spam)
 
 ## Project Health
 - All services running. No known bugs. No mocked APIs in current Capabilities work.
