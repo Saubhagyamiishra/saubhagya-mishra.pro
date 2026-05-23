@@ -9,6 +9,7 @@ import { Hero } from "@/components/new/Hero";
 import { InfiniteMarquee } from "@/components/new/Marquee";
 import { About } from "@/components/new/About";
 import { Capabilities } from "@/components/new/Capabilities";
+import { JarvisliveDemo } from "@/components/new/JarvisliveDemo";
 import { Projects } from "@/components/new/Projects";
 import { ResultsDashboard } from "@/components/new/ResultsDashboard";
 import { ProcessTimeline } from "@/components/new/ProcessTimeline";
@@ -30,6 +31,7 @@ function HomePage() {
       <InfiniteMarquee />
       <About />
       <Capabilities />
+      <JarvisliveDemo />
       <Projects />
       <ResultsDashboard />
       <ProcessTimeline />

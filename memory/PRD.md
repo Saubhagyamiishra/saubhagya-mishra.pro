@@ -12,9 +12,9 @@ Backend (FastAPI + MongoDB) and admin panel remain untouched.
 - **Backend**: FastAPI (Python), MongoDB + GridFS.
 - **Routing**: `/admin` (preserved legacy panel), all sections live in `src/components/new/`.
 
-## Sections (13)
-Navigation · Hero · Marquee · About · **Capabilities** · Projects · Dashboard ·
-Timeline · Lab · Testimonials · Contact · Footer · InkCursor.
+## Sections (14)
+Navigation · Hero · Marquee · About · **Capabilities** · **Jarvislive Demo** ·
+Projects · Dashboard · Timeline · Lab · Testimonials · Contact · Footer · InkCursor.
 
 ## Completed Work
 - 2026-02 — Complete UI redesign to Editorial Tech Lab theme
@@ -38,6 +38,16 @@ Timeline · Lab · Testimonials · Contact · Footer · InkCursor.
 - 2026-02 — **Contact form roundtrip polished**: now surfaces real backend
   `submission_id` (last 8 chars) in toast and shows backend's `response.data.message`
   in success overlay. Verified end-to-end (MongoDB persistence confirmed).
+- 2026-02 — **Ink-Trail Cursor toned down**: fixed alpha bug (hex→rgba helper),
+  shortened to 12 points, capped width at 2.5px, alpha 0.45 top / 0.10 bleed,
+  110ms decay, shadowBlur 2.
+- 2026-02 — **Jarvislive · Live Demo section added** (between Capabilities & Projects):
+  fully simulated frontend-only AI pipeline. Dark ink panel, two-column layout
+  (control + terminal). Textarea + 4 presets + ⌘/Ctrl+Enter. Terminal streams
+  4 steps (parse → claude → n8n → db) with amber pulsing → green ✓ + ms timing
+  on a vertical rail. Output block typewriters canned text. LED status
+  IDLE→EXECUTING→DONE. Keyword-routed fallback for custom requests.
+  `prefers-reduced-motion` skips animations. Zero API calls / network / env vars.
 
 ## Files of Reference
 - `/app/frontend/src/components/new/Capabilities.jsx` — split-panel logic
