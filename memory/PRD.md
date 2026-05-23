@@ -58,6 +58,11 @@ Projects · Dashboard · Timeline · Lab · Testimonials · Contact · Footer ·
   smooth-scrolls to `#contact`. Body scroll locked while open. Confetti is
   memoized (`React.memo` + `useMemo`) so it never restarts. Honors
   `prefers-reduced-motion`. Zero hints anywhere in the visible UI.
+- 2026-02 — **Konami breadcrumb** in `Navigation.jsx`: on the *first ever*
+  hover over the SM logo, a tiny dark pill fades in for ~600ms reading
+  `↑↑↓↓··· shh` (amber + off-white mono). Persisted via
+  `localStorage.sm:konami-hint-seen`, so it appears once per browser and never
+  again. Cryptic enough to intrigue without spoiling the actual code.
 
 ## Files of Reference
 - `/app/frontend/src/components/new/Capabilities.jsx` — split-panel logic
