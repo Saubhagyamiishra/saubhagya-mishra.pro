@@ -18,6 +18,7 @@ import { Testimonials } from "@/components/new/Testimonials";
 import { Contact } from "@/components/new/Contact";
 import { Footer } from "@/components/new/Footer";
 import { InkCursor } from "@/components/new/InkCursor";
+import { LabModeEasterEgg } from "@/components/new/LabModeEasterEgg";
 
 // Preserve existing Admin Dashboard
 import AdminDashboard from "@/components/AdminDashboard";
@@ -39,6 +40,7 @@ function HomePage() {
       <Testimonials />
       <Contact />
       <Footer />
+      <LabModeEasterEgg />
     </div>
   );
 }

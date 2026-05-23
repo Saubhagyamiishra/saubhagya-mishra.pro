@@ -48,6 +48,16 @@ Projects · Dashboard · Timeline · Lab · Testimonials · Contact · Footer ·
   on a vertical rail. Output block typewriters canned text. LED status
   IDLE→EXECUTING→DONE. Keyword-routed fallback for custom requests.
   `prefers-reduced-motion` skips animations. Zero API calls / network / env vars.
+- 2026-02 — **Hidden "Lab Mode" easter egg** (`LabModeEasterEgg.jsx`, global overlay).
+  Triggered by Konami `↑ ↑ ↓ ↓ ← → ← → B A` **or** typing the word `labmode`
+  (typed trigger is ignored while focus is in `<input>`/`<textarea>`).
+  Full-screen CRT terminal (#070a07 + scanlines + vignette), confetti burst,
+  rAF-driven typewriter that runs through an 11-line boot sequence with
+  per-line colors (dim-green commands → white ok → amber accent → soft-green
+  prose → amber CTA with blinking ▋). ESC / Exit / CTA all close; CTA also
+  smooth-scrolls to `#contact`. Body scroll locked while open. Confetti is
+  memoized (`React.memo` + `useMemo`) so it never restarts. Honors
+  `prefers-reduced-motion`. Zero hints anywhere in the visible UI.
 
 ## Files of Reference
 - `/app/frontend/src/components/new/Capabilities.jsx` — split-panel logic
