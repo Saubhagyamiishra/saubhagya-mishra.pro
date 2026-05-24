@@ -1,9 +1,88 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, TrendUp, Activity, Stack } from '@phosphor-icons/react';
+import { useEffect, useRef } from 'react';
+import { ArrowRight } from '@phosphor-icons/react';
 
 export const Hero = () => {
+  const sectionRef = useRef(null);
+  const spotlightRef = useRef(null);
+
+  useEffect(() => {
+    // Skip on touch / coarse-pointer devices
+    if (typeof window === 'undefined') return undefined;
+    if (window.matchMedia('(hover: none)').matches) return undefined;
+
+    const section = sectionRef.current;
+    const spotlight = spotlightRef.current;
+    if (!section || !spotlight) return undefined;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Initial: centered glow
+    let curX = 50;
+    let curY = 40;
+    let tgtX = 50;
+    let tgtY = 40;
+    spotlight.style.setProperty('--sx', '50%');
+    spotlight.style.setProperty('--sy', '40%');
+
+    let rafId = null;
+    let lastMoveT = 0;
+
+    const tick = () => {
+      const dx = tgtX - curX;
+      const dy = tgtY - curY;
+      curX += dx * 0.12;
+      curY += dy * 0.12;
+      spotlight.style.setProperty('--sx', `${curX}%`);
+      spotlight.style.setProperty('--sy', `${curY}%`);
+      // settle threshold + idle stop
+      if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05 || performance.now() - lastMoveT < 120) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        rafId = null;
+      }
+    };
+
+    const onMove = (e) => {
+      const rect = section.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      if (reducedMotion) {
+        // No easing — snap once
+        curX = x; curY = y;
+        spotlight.style.setProperty('--sx', `${x}%`);
+        spotlight.style.setProperty('--sy', `${y}%`);
+        return;
+      }
+      tgtX = x;
+      tgtY = y;
+      lastMoveT = performance.now();
+      if (rafId == null) rafId = requestAnimationFrame(tick);
+    };
+
+    const onEnter = () => spotlight.classList.add('lit');
+    const onLeave = () => spotlight.classList.remove('lit');
+
+    section.addEventListener('mousemove', onMove);
+    section.addEventListener('mouseenter', onEnter);
+    section.addEventListener('mouseleave', onLeave);
+
+    return () => {
+      section.removeEventListener('mousemove', onMove);
+      section.removeEventListener('mouseenter', onEnter);
+      section.removeEventListener('mouseleave', onLeave);
+      if (rafId != null) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+    >
+      {/* Cursor-following spotlight (ambient layer, no pointer interception) */}
+      <div ref={spotlightRef} className="hero-spotlight" aria-hidden="true" />
+
       {/* Background Gradient Orbs */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
