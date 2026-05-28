@@ -64,17 +64,16 @@ Projects · Dashboard · Timeline · Lab · Testimonials · Contact · Footer ·
   `localStorage.sm:konami-hint-seen`, so it appears once per browser and never
   again. Cryptic enough to intrigue without spoiling the actual code.
 - 2026-02 — **Ambient visual layer upgrades**:
-  - `index.css`: rebuilt the global grain (`body::before`) with the explicit
-    fractalNoise SVG data-URI from the spec, `opacity: 0.5`,
-    `mix-blend-mode: multiply`, `pointer-events: none`, `z-index: 9999`
-    (kept high so multiply darkens *every* section — not just body bg).
-  - `Hero.jsx` + `index.css`: added `.hero-spotlight` ambient layer inside the
-    hero. Soft 340px orange→amber radial glow at `--sx/--sy`, plus a
-    radial-masked 80px orange grid that "lights up" the blueprint beneath the
-    cursor. Driven by a rAF lerp (factor 0.12) on mousemove with an idle
-    stop. Fades in/out via `.lit` class on mouseenter/mouseleave. Disabled by
-    both CSS (`@media (hover: none)`) and JS (`matchMedia('(hover: none)')`).
-    `prefers-reduced-motion` snaps without easing.
+  - `index.css`: **removed** the global `body::before` grain (it competed with
+    the dark Lab / Timeline / Jarvislive sections) and added a new
+    `.hero-grain` rule scoped to the hero only — fractalNoise SVG data-URI,
+    `opacity: 0.55`, `mix-blend-mode: multiply`, `pointer-events: none`,
+    `z-index: 1`, `background-size: 240px 240px`.
+  - `Hero.jsx`: inserted `<div className="hero-grain" />` between the
+    grid-pattern layer and content; bumped content + scroll-hint to
+    `z-[2]` so headline/cards/CTAs stay crisp above the grain.
+  - `Hero.jsx` + `index.css`: added `.hero-spotlight` ambient layer inside
+    the hero (described in earlier entry).
 
 ## Files of Reference
 - `/app/frontend/src/components/new/Capabilities.jsx` — split-panel logic

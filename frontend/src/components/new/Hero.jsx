@@ -126,7 +126,10 @@ export const Hero = () => {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      {/* Film-grain — hero-only ink-on-paper texture (above orbs/grid, below content) */}
+      <div className="hero-grain" aria-hidden="true" />
+
+      <div className="relative z-[2] max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Column - Content */}
         <div className="space-y-8">
           {/* Status Pill */}
