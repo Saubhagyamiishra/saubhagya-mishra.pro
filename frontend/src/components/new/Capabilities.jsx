@@ -24,8 +24,20 @@ export const Capabilities = () => {
   const [userTookOver, setUserTookOver] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [inView, setInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   const intervalRef = useRef(null);
+
+  // Detect mobile/touch (≤1024px OR coarse pointer) — disables auto-advance,
+  // hover handoff, keyboard nav, and switches the list into a true accordion.
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+    const mq = window.matchMedia('(max-width: 1023px), (hover: none)');
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
 
   // IntersectionObserver — only auto-advance when section is visible
   useEffect(() => {
@@ -39,9 +51,9 @@ export const Capabilities = () => {
     return () => obs.disconnect();
   }, []);
 
-  // Auto-advance loop — paused if user took over, paused manually, or out of view
+  // Auto-advance loop — desktop only; disabled if user took over, paused, or out of view
   useEffect(() => {
-    if (userTookOver || isPaused || !inView) {
+    if (isMobile || userTookOver || isPaused || !inView) {
       if (intervalRef.current) clearInterval(intervalRef.current);
       return;
     }
@@ -49,16 +61,16 @@ export const Capabilities = () => {
       setActiveIndex((i) => (i + 1) % capabilities.length);
     }, AUTO_INTERVAL_MS);
     return () => clearInterval(intervalRef.current);
-  }, [userTookOver, isPaused, inView]);
+  }, [isMobile, userTookOver, isPaused, inView]);
 
   const handoff = useCallback((idx) => {
     setActiveIndex(idx);
     setUserTookOver(true);
   }, []);
 
-  // Keyboard navigation — only when section is in view and not typing in an input
+  // Keyboard navigation — desktop only, when section is in view and focus is outside inputs
   useEffect(() => {
-    if (!inView) return undefined;
+    if (!inView || isMobile) return undefined;
     const onKey = (e) => {
       const tag = (e.target?.tagName || '').toLowerCase();
       if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
@@ -77,7 +89,7 @@ export const Capabilities = () => {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [inView]);
+  }, [inView, isMobile]);
 
   const togglePlayback = () => {
     if (userTookOver) {
@@ -121,59 +133,29 @@ export const Capabilities = () => {
           What I build, ship,<br />and optimize.
         </motion.h2>
 
-        {/* Mobile stage (≤1024px) — appears ABOVE the list */}
-        <div className="lg:hidden mb-10">
-          <div className="relative">
-            <div className="font-fraunces text-[120px] leading-none tracking-tighter text-ink/10 absolute -top-6 -left-1 pointer-events-none select-none">
-              {active.id}
-            </div>
-            <div className="relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active.id + '-m'}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {ActiveVisual ? <ActiveVisual /> : null}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            <div className="mt-4">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/40 bg-accent/5 label-mono text-[10px] text-accent">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                {active.code} · ACTIVE
-              </span>
-            </div>
-          </div>
-        </div>
-
         {/* Split panel */}
         <div className="lg:grid lg:gap-16" style={{ gridTemplateColumns: 'minmax(0, 1.05fr) minmax(0, 1fr)' }}>
-          {/* LEFT — list */}
+          {/* LEFT — list (accordion on mobile, side-by-side on desktop) */}
           <ul
             className="relative border-t border-line-strong"
             data-testid="capabilities-list"
-            onMouseLeave={() => { /* no-op: handoff is permanent */ }}
           >
             {capabilities.map((cap, idx) => {
               const isActive = idx === activeIndex;
+              const RowVisual = VisualMap[cap.id];
               return (
                 <li
                   key={cap.id}
                   data-testid={`capability-row-${cap.id}`}
                   data-active={isActive}
-                  onMouseEnter={() => handoff(idx)}
+                  onMouseEnter={isMobile ? undefined : () => handoff(idx)}
                   onClick={() => handoff(idx)}
                   className={[
-                    'group relative border-b border-line-strong cursor-pointer overflow-hidden',
-                    'transition-[height,background-color,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                    isActive ? 'bg-paper' : 'hover:pl-3',
+                    'group relative border-b border-line-strong cursor-pointer',
+                    'lg:overflow-hidden lg:transition-[height,background-color,padding] lg:duration-500 lg:ease-[cubic-bezier(0.22,1,0.36,1)]',
+                    isActive ? 'bg-paper' : 'lg:hover:pl-3',
                   ].join(' ')}
-                  style={{
-                    height: isActive ? 124 : 70,
-                  }}
+                  style={isMobile ? undefined : { height: isActive ? 124 : 70 }}
                 >
                   {/* Orange sidebar */}
                   <span
@@ -191,7 +173,8 @@ export const Capabilities = () => {
                         'linear-gradient(90deg, var(--accent-glow) 0%, rgba(255,90,31,0) 60%)',
                     }}
                   />
-                  <div className="relative h-full px-5 sm:px-7 flex items-center gap-6">
+                  {/* Title bar */}
+                  <div className="relative h-[70px] lg:h-full px-5 sm:px-7 flex items-center gap-6">
                     {/* Index */}
                     <span
                       className={[
@@ -213,12 +196,14 @@ export const Capabilities = () => {
                         <span className="absolute -inset-1.5 rounded-full bg-accent/30 animate-ping" />
                       )}
                     </span>
-                    {/* Title + code */}
+                    {/* Title + (desktop-only inline description) */}
                     <div className="flex-1 min-w-0">
                       <h3
                         className={[
                           'font-fraunces font-medium leading-tight tracking-tight transition-all duration-500',
-                          isActive ? 'text-2xl sm:text-3xl text-ink' : 'text-lg sm:text-xl text-ink/55 group-hover:text-ink/85',
+                          isActive
+                            ? 'text-xl sm:text-2xl lg:text-3xl text-ink'
+                            : 'text-lg sm:text-xl text-ink/55 group-hover:text-ink/85',
                         ].join(' ')}
                       >
                         {cap.title}
@@ -228,20 +213,69 @@ export const Capabilities = () => {
                           initial={{ opacity: 0, y: 6 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.4, delay: 0.1 }}
-                          className="text-sm text-muted mt-1.5 hidden sm:block"
+                          className="text-sm text-muted mt-1.5 hidden sm:block lg:block"
                         >
                           {cap.description}
                         </motion.p>
                       )}
                     </div>
+                    {/* Right side: desktop code label */}
                     <span
                       className={[
-                        'label-mono text-[10px] hidden sm:block transition-colors duration-300',
+                        'label-mono text-[10px] hidden sm:block lg:block transition-colors duration-300',
                         isActive ? 'text-ink' : 'text-muted',
                       ].join(' ')}
                     >
                       {cap.code}
                     </span>
+                    {/* Mobile-only chevron — signals accordion */}
+                    <span className="lg:hidden shrink-0" aria-hidden>
+                      <svg
+                        width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" strokeWidth="2.4"
+                        strokeLinecap="round" strokeLinejoin="round"
+                        className={[
+                          'transition-transform duration-300',
+                          isActive ? 'rotate-180 text-accent' : 'text-muted',
+                        ].join(' ')}
+                      >
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </span>
+                  </div>
+
+                  {/* Mobile-only inline expansion: description + framed visual */}
+                  <div className="lg:hidden">
+                    <AnimatePresence initial={false}>
+                      {isActive && (
+                        <motion.div
+                          key={`${cap.id}-expand`}
+                          initial={{ opacity: 0, y: 10, height: 0 }}
+                          animate={{ opacity: 1, y: 0, height: 'auto' }}
+                          exit={{ opacity: 0, y: -6, height: 0 }}
+                          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                          style={{ overflow: 'hidden' }}
+                          data-testid={`capability-row-expansion-${cap.id}`}
+                        >
+                          <div className="px-5 sm:px-7 pb-6 pt-1">
+                            <div className="flex items-center gap-2 mb-3">
+                              <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-accent/40 bg-accent/5 label-mono text-[9px] text-accent">
+                                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                                {cap.code} · ACTIVE
+                              </span>
+                            </div>
+                            <p className="text-sm text-ink-2 leading-relaxed mb-4">
+                              {cap.description}
+                            </p>
+                            <div className="rounded-2xl bg-paper border border-line-strong p-4 shadow-soft">
+                              <div className="mx-auto" style={{ maxWidth: '240px' }}>
+                                {RowVisual ? <RowVisual /> : null}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </li>
               );
