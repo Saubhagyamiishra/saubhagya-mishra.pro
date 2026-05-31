@@ -124,11 +124,6 @@ export const Footer = () => {
             <span className="hidden sm:inline">·</span>
             <span>All systems operational</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span>Designed & built</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span>in India</span>
-          </div>
         </div>
       </div>
     </footer>
