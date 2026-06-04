@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# SIGNAL — Saubhagya Mishra
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A cinematic personal portfolio. One persistent WebGL world that the camera
+travels through as you scroll: particles resolve into the name, you dive into
+the signal, projects orbit a luminous core, everything collapses to a
+singularity, then pulls back to reveal one interconnected system.
 
-## Available Scripts
+Built with **Next.js (App Router) + TypeScript**, **React Three Fiber / three.js**,
+**GSAP ScrollTrigger**, **Framer Motion**, and **Lenis** smooth scroll.
 
-In the project directory, you can run:
+## Run it
 
-### `npm start`
+```bash
+npm install
+npm run dev
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open http://localhost:3000
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Production:
 
-### `npm test`
+```bash
+npm run build
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Requires Node 18.17+ (Node 20+ recommended).
 
-### `npm run build`
+## What to customize
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Almost everything lives in **`lib/data.ts`**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `PROJECTS` — your work. Each has a `hue` (0..1) that tints its 3D artifact.
+- `STORY` — the About beats.
+- `SKILL_NODES` / `SKILL_LINKS` — the interactive ecosystem graph.
+- `STATUS` — the bottom-left instrument rail.
+- `CONTACT` — **edit the email and social links** (currently placeholders).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Other quick edits:
 
-### `npm run eject`
+- **Portrait**: `components/sections/About.tsx` has a monogram placeholder.
+  Drop an image into `/public` and replace the `.portrait` block with
+  `next/image`.
+- **Colors / fonts**: CSS variables at the top of `app/globals.css`.
+- **The 3D feel**: scroll-driven camera waypoints are in
+  `components/scene/CameraRig.tsx`; particle behaviour and the singularity
+  collapse are in `components/scene/shaders.ts` + `Starfield.tsx`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Performance
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The scene auto-detects low-power / mobile devices (`lib/hooks.ts → useDeviceTier`)
+and drops particle counts, lowers the pixel ratio, and disables post-processing
+(bloom, chromatic aberration). It also respects `prefers-reduced-motion`,
+shortening the intro and calming the motion.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you want it lighter everywhere, lower the `count` passed to `Starfield` and
+the `detail` on `SignalCore` in `components/scene/Experience.tsx`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Structure
 
-## Learn More
+```
+app/            layout, page, globals.css
+components/
+  scene/        WebGL: Experience (Canvas), Starfield, SignalCore,
+                ProjectArtifacts, CameraRig, Effects, shaders
+  sections/     DOM: Hero, Identity, Projects, About, Skills, Contact
+  Site.tsx      orchestrator (preloader + canvas + scroll + UI)
+  SmoothScroll, Preloader, Cursor, Nav, StatusRail
+lib/            data, scroll store, hooks
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All copy avoids em dashes by design.
