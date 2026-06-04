@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { NAV } from "@/lib/data";
-import { scrollState, lenisRef } from "@/lib/scroll";
+import { NAV } from "../lib/data";
+import { scrollState, lenisRef } from "../lib/scroll";
 
 const THRESHOLDS = [0.13, 0.26, 0.6, 0.95]; // boundaries between the 5 sections
 

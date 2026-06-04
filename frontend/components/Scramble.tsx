@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePrefersReducedMotion } from "@/lib/hooks";
+import { usePrefersReducedMotion } from "../lib/hooks";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>-_*#%";
 

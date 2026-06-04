@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { usePrefersReducedMotion, useDeviceTier } from "@/lib/hooks";
-import { scrollState } from "@/lib/scroll";
-import Scramble from "@/components/Scramble";
+import { usePrefersReducedMotion, useDeviceTier } from "../../lib/hooks";
+import { scrollState } from "../../lib/scroll";
+import Scramble from "../Scramble";
 
 // Register at module load — idempotent and avoids mount-order races on slow tiers.
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);

@@ -4,9 +4,9 @@ import { memo, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SKILLS } from "@/lib/data";
-import { useDeviceTier, usePrefersReducedMotion } from "@/lib/hooks";
-import Scramble from "@/components/Scramble";
+import { SKILLS } from "../../lib/data";
+import { useDeviceTier, usePrefersReducedMotion } from "../../lib/hooks";
+import Scramble from "../Scramble";
 
 const R = 460; // carousel radius
 const SWEEP = 300; // total degrees revolved across the scroll

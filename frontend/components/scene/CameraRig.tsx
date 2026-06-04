@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { scrollState, band, smooth, lerp, damp } from "@/lib/scroll";
+import { scrollState, band, smooth, lerp, damp } from "../../lib/scroll";
 
 export default function CameraRig() {
   const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera;

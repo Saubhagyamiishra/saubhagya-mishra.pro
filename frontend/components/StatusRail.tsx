@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { STATUS, NAV } from "@/lib/data";
-import { scrollState } from "@/lib/scroll";
+import { STATUS, NAV } from "../lib/data";
+import { scrollState } from "../lib/scroll";
 
 const THRESHOLDS = [0.13, 0.26, 0.6, 0.95];
 

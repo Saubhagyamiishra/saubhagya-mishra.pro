@@ -4,9 +4,9 @@ import { memo, useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { PROJECTS, Project } from "@/lib/data";
-import { useDeviceTier, usePrefersReducedMotion } from "@/lib/hooks";
-import Scramble from "@/components/Scramble";
+import { PROJECTS, Project } from "../../lib/data";
+import { useDeviceTier, usePrefersReducedMotion } from "../../lib/hooks";
+import Scramble from "../Scramble";
 
 const DEPTH = 640; // px translateZ travel
 const LATERAL = 46; // vw lateral sweep

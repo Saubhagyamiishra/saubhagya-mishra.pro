@@ -10,7 +10,7 @@ import { BlendFunction } from "postprocessing";
 import * as THREE from "three";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { scrollState, band } from "@/lib/scroll";
+import { scrollState, band } from "../../lib/scroll";
 
 export default function Effects() {
   const ca = useRef<{ offset: THREE.Vector2 }>(null);

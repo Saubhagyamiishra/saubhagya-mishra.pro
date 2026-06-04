@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { scrollState } from "@/lib/scroll";
+import { scrollState } from "../lib/scroll";
 
 // Evolving ambient "space" piece + interaction SFX, all synthesized in-browser.
 // Drone bed + slow diatonic chord changes + sparse pentatonic notes through

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { usePrefersReducedMotion } from "@/lib/hooks";
+import { usePrefersReducedMotion } from "../lib/hooks";
 
 const LINE1 = "SAUBHAGYA";
 const LINE2 = "MISHRA";

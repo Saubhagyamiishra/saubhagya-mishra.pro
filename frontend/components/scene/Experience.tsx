@@ -7,7 +7,7 @@ import SignalCore from "./SignalCore";
 import ProjectArtifacts from "./ProjectArtifacts";
 import CameraRig from "./CameraRig";
 import Effects from "./Effects";
-import { useDeviceTier, usePrefersReducedMotion } from "@/lib/hooks";
+import { useDeviceTier, usePrefersReducedMotion } from "../../lib/hooks";
 
 export default function Experience({
   activeProject,

@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { CONTACT } from "@/lib/data";
-import Scramble from "@/components/Scramble";
+import { CONTACT } from "../../lib/data";
+import Scramble from "../Scramble";
 
 function MagneticButton({
   children,

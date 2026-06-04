@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { setProgress, setPointer, lenisRef } from "@/lib/scroll";
-import { usePrefersReducedMotion } from "@/lib/hooks";
+import { setProgress, setPointer, lenisRef } from "../lib/scroll";
+import { usePrefersReducedMotion } from "../lib/hooks";
 
 export default function SmoothScroll({
   children,

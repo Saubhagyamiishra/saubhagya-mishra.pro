@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { CORE_VERT, CORE_FRAG } from "./shaders";
-import { scrollState, band, damp, lerp } from "@/lib/scroll";
+import { scrollState, band, damp, lerp } from "../../lib/scroll";
 
 const COLOR = new THREE.Color("#ff9b3d");
 const COLOR2 = new THREE.Color("#ffd9a0");
