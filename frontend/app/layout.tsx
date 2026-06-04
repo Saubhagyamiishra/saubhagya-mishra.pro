@@ -35,8 +35,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         {/* Display: Bricolage Grotesque · Accent serif: Instrument Serif · Mono: Space Mono · Body: Sora */}
+        {/* Mobile portfolio fonts: Fraunces (display) · Geist (body) · Geist Mono (labels) */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
           rel="stylesheet"
         />
       </head>
