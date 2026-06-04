@@ -1,15 +1,18 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  // three ships untranspiled ESM in places; transpiling avoids edge-case build errors.
   transpilePackages: ["three"],
-  // Fonts load at runtime via the <link> in app/layout.tsx. Skipping build-time
-  // font inlining keeps `next build` clean even on offline / restricted networks.
   optimizeFonts: false,
-  eslint: {
-    // Keep `next build` focused on type/compile errors, not lint nits.
-    ignoreDuringBuilds: true,
+  eslint: { ignoreDuringBuilds: true },
+  webpack: (config) => {
+    config.resolve.alias['@'] = path.resolve(__dirname);
+    return config;
   },
 };
 
