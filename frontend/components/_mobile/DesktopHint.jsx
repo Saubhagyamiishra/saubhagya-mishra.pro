@@ -40,11 +40,11 @@ export const DesktopHint = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[60] pointer-events-auto"
+          className="fixed bottom-5 left-3 right-3 z-[60] pointer-events-auto flex justify-center"
           data-testid="desktop-hint"
         >
           <div
-            className="flex items-center gap-3 pl-4 pr-2 py-2 rounded-full border border-line-strong shadow-soft"
+            className="inline-flex items-center gap-2 pl-3 pr-1.5 py-1.5 rounded-full border border-line-strong shadow-soft max-w-full"
             style={{
               background: "rgba(251, 249, 244, 0.92)",
               backdropFilter: "blur(14px) saturate(140%)",
@@ -56,15 +56,18 @@ export const DesktopHint = () => {
               style={{ background: "var(--accent)" }}
               aria-hidden
             />
-            <span className="label-mono text-[10px] text-ink-2 whitespace-nowrap">
-              Best viewed on desktop · cinematic version awaits
+            <span
+              className="font-mono text-[10px] text-ink-2 truncate min-w-0"
+              style={{ letterSpacing: "0.01em" }}
+            >
+              Cinematic version on desktop
             </span>
             <button
               type="button"
               onClick={dismiss}
               aria-label="Dismiss desktop hint"
               data-testid="desktop-hint-dismiss"
-              className="w-6 h-6 inline-flex items-center justify-center rounded-full text-muted hover:text-ink hover:bg-ink/5 transition-colors"
+              className="w-5 h-5 inline-flex items-center justify-center rounded-full text-muted hover:text-ink hover:bg-ink/5 transition-colors shrink-0"
             >
               <svg
                 width="11"
