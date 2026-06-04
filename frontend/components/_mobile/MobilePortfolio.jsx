@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import "../../app/_mobile.css";
 import { Navigation } from "./Navigation";
 import { Hero } from "./Hero";
@@ -19,6 +20,14 @@ import { DesktopHint } from "./DesktopHint";
 // All Tailwind utilities live under `.mobile-root` so the SIGNAL build (which
 // uses pure CSS) is untouched.
 export default function MobilePortfolio() {
+  // Signal to the inline boot splash (rendered in app/layout.tsx) that the
+  // mobile client bundle has hydrated. The splash listens for this event
+  // (with `window.load` and a 7s timeout as fallbacks) and fades itself out.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(new Event("app-ready"));
+  }, []);
+
   return (
     <div className="mobile-root min-h-screen">
       <InkCursor />
