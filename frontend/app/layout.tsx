@@ -2,12 +2,12 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Saubhagya Mishra — Signal",
+  title: "Saubhagya Mishra",
   description:
     "Saubhagya Mishra. Director of Digital Marketing, builder, and automation enthusiast. Marketing, analytics and AI, wired into one signal.",
   authors: [{ name: "Saubhagya Mishra" }],
   openGraph: {
-    title: "Saubhagya Mishra — Signal",
+    title: "Saubhagya Mishra",
     description:
       "Builder, marketer, automation enthusiast. Marketing, analytics and AI in one signal.",
     type: "website",
