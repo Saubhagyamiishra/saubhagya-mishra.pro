@@ -13,6 +13,7 @@ import { ContactCard } from "./ContactCard";
 import { Footer } from "./Footer";
 import { InkCursor } from "./InkCursor";
 import { LabModeEasterEgg } from "./LabModeEasterEgg";
+import { DesktopHint } from "./DesktopHint";
 
 // The full Editorial Tech Lab portfolio — served only on viewports < 1024px.
 // All Tailwind utilities live under `.mobile-root` so the SIGNAL build (which
@@ -34,6 +35,7 @@ export default function MobilePortfolio() {
       </main>
       <Footer />
       <LabModeEasterEgg />
+      <DesktopHint />
     </div>
   );
 }

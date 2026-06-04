@@ -111,7 +111,7 @@ export const Capabilities = () => {
     <section
       id="capabilities"
       ref={sectionRef}
-      className="relative py-32 bg-bg"
+      className="relative py-16 lg:py-32 bg-bg"
       data-testid="capabilities-section"
     >
       <div className="max-w-7xl mx-auto px-6">

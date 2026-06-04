@@ -23,8 +23,15 @@ const MobilePortfolio = dynamic(
 
 const MOBILE_QUERY = "(max-width: 1023px)";
 
+// Synchronous initial detection — runs once on first client render so the
+// correct bundle starts loading immediately (no blank wait for useEffect).
+const detectIsMobile = () => {
+  if (typeof window === "undefined") return null;
+  return window.matchMedia(MOBILE_QUERY).matches;
+};
+
 export default function Page() {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean | null>(detectIsMobile);
 
   useEffect(() => {
     const mq = window.matchMedia(MOBILE_QUERY);

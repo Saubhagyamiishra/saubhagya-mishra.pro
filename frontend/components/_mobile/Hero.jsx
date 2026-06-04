@@ -194,7 +194,7 @@ export const Hero = () => {
             </button>
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              className="btn-pill bg-paper text-ink border border-line-strong hover:border-accent transition-all"
+              className="btn-pill btn-pill-ghost hover:border-accent"
             >
               Work With Me
             </button>

@@ -45,6 +45,15 @@
     background: var(--ink);
     color: var(--paper);
   }
+
+  /* Kill iOS Safari's grey tap-highlight on all interactive elements.
+     The defaults flash a translucent box over the button on touch which
+     looks like a stuck highlight on mobile screenshots. */
+  .mobile-root button,
+  .mobile-root a,
+  .mobile-root [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 @layer components {
@@ -59,6 +68,32 @@
   .mobile-root .label-mono {
     @apply font-mono uppercase text-xs;
     letter-spacing: 0.2em;
+  }
+  /* Shared pill button shape — padding + rounded corners.
+     Background/border are set per-instance via Tailwind. */
+  .mobile-root .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    transition: background-color 0.25s ease, color 0.25s ease,
+                border-color 0.25s ease, transform 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* Ghost variant — transparent background so it doesn't look like
+     a solid cream block sitting on the cream page bg. */
+  .mobile-root .btn-pill-ghost {
+    background: transparent !important;
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+  }
+  .mobile-root .btn-pill-ghost:hover {
+    border-color: var(--accent);
+    color: var(--ink);
   }
 }
 

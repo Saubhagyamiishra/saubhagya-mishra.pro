@@ -323,7 +323,7 @@ export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="work" className="relative py-32 bg-bg">
+    <section id="work" className="relative py-16 lg:py-32 bg-bg">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Label */}
         <motion.div
