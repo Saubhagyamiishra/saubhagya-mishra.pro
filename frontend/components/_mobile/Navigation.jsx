@@ -29,7 +29,10 @@ export const Navigation = () => {
     try {
       if (localStorage.getItem(KONAMI_HINT_KEY)) return;
       localStorage.setItem(KONAMI_HINT_KEY, '1');
-    } catch (_) { /* localStorage may be disabled — show once per session anyway */ }
+    } catch {
+      // localStorage may be disabled (private mode / quota / iframe).
+      // Graceful degradation: show the hint once per session instead of once per browser.
+    }
     setShowHint(true);
     hintTimerRef.current = setTimeout(() => setShowHint(false), 600);
   };
