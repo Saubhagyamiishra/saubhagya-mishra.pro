@@ -2,20 +2,20 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import SmoothScroll from "@/components/SmoothScroll";
-import Preloader from "@/components/Preloader";
-import Nav from "@/components/Nav";
-import StatusRail from "@/components/StatusRail";
-import Ambient from "@/components/Ambient";
-import Hero from "@/components/sections/Hero";
-import Identity from "@/components/sections/Identity";
-import Projects from "@/components/sections/Projects";
-import Skills from "@/components/sections/Skills";
-import Contact from "@/components/sections/Contact";
-import { useMounted } from "@/lib/hooks";
+import SmoothScroll from "./SmoothScroll";
+import Preloader from "./Preloader";
+import Nav from "./Nav";
+import StatusRail from "./StatusRail";
+import Ambient from "./Ambient";
+import Hero from "./sections/Hero";
+import Identity from "./sections/Identity";
+import Projects from "./sections/Projects";
+import Skills from "./sections/Skills";
+import Contact from "./sections/Contact";
+import { useMounted } from "../lib/hooks";
 
 // R3F must stay client-only.
-const Experience = dynamic(() => import("@/components/scene/Experience"), {
+const Experience = dynamic(() => import("./scene/Experience"), {
   ssr: false,
   loading: () => null,
 });
