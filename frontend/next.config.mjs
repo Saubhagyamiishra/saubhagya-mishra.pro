@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   reactStrictMode: true,
   // three ships untranspiled ESM in places; transpiling avoids edge-case build errors.
   transpilePackages: ["three"],
